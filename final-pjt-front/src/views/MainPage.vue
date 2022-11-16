@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <NavBar />
     <div>MainPage</div>
     <FooterComponent />
@@ -18,4 +18,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.container {
+  /* background-color: #111827; */
+  background-color: var(--gray8);
+}
+</style>

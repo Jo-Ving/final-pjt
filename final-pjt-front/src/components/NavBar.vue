@@ -5,7 +5,7 @@
       <nav>
         <ul class="nav-left navItem">
           <li><router-link to="/">HOME</router-link></li>
-          <li>내가 찜한 콘텐츠</li>
+          <li><router-link to="/myfavorite">내가 찜한 콘텐츠</router-link></li>
         </ul>
         <ul class="nav-right navItem">
           <li>검색</li>

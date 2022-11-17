@@ -1,16 +1,15 @@
 <template>
   <div>
-    <nav>
-      <router-link to="/">HOME</router-link> |
-      <router-link to="/auth">Login</router-link>
-    </nav>
+    <NavBar />
     <router-view />
   </div>
 </template>
 
 <script>
+import NavBar from "./components/NavBar.vue";
 export default {
   name: "BrowserRouter",
+  components: { NavBar },
 };
 </script>
 

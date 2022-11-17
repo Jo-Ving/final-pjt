@@ -55,7 +55,6 @@ export default {
     },
     onLoginButtonClick(e) {
       console.log(e.target);
-      console.log(this.email, this.password);
       this.resetInput();
     },
     resetInput() {

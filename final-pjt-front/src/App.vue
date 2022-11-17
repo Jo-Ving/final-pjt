@@ -26,6 +26,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background-color: var(--gray8);
+  min-height: 100vh;
 }
 
 nav a {

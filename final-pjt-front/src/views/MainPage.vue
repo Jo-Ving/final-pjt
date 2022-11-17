@@ -1,22 +1,38 @@
 <template>
   <div class="container">
-    <div>MainPage</div>
-    <FooterComponent />
+    <!-- header1  -->
+    <CoverMovie />
+    <!-- movies you must watch  -->
+    <SliderComponent />
+    <SliderComponent />
+    <SliderComponent />
   </div>
 </template>
 
 <script>
-import FooterComponent from "../components/FooterComponent.vue";
+import SliderComponent from "../components/SliderComponent.vue";
+import CoverMovie from "../components/CoverMovie.vue";
+
 export default {
   name: "MainPage",
-  components: {
-    FooterComponent,
-  },
+  components: { SliderComponent, CoverMovie },
 };
 </script>
 
 <style scoped>
-.container {
-  /* background-color: #111827; */
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+li {
+  width: 183px;
+  height: 275px;
+  border: 1px solid white;
+}
+.slider {
+  display: flex;
+  justify-content: center;
 }
 </style>

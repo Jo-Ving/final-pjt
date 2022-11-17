@@ -27,12 +27,12 @@
 </template>
 
 <script>
-import InputComponent from "../components/InputComponent.vue";
-import { checkEmailValidate } from "../utils/validators";
-import { EMAIL_VALIDATION_FALSE } from "../assets/constants";
+import InputComponent from "../../components/InputComponent.vue";
+import { checkEmailValidate } from "../../utils/validators";
+import { EMAIL_VALIDATION_FALSE } from "../../assets/constants";
 
 export default {
-  name: "MainPage",
+  name: "LoginPage",
   data() {
     return {
       email: "",

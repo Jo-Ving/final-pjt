@@ -10,7 +10,7 @@
         <ul class="nav-right navItem">
           <li>검색</li>
           <li>햄버거바</li>
-          <li><router-link to="/auth">Login</router-link></li>
+          <li><router-link to="/login">Login</router-link></li>
         </ul>
       </nav>
     </div>

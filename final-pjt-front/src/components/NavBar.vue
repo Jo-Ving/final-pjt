@@ -2,14 +2,17 @@
   <nav class="container">
     <div class="logo">Logo</div>
     <div class="navBar">
-      <ul class="nav-left navItem">
-        <li>HOME</li>
-        <li>내가 찜한 콘텐츠</li>
-      </ul>
-      <ul class="nav-right navItem">
-        <li>검색</li>
-        <li>햄버거바</li>
-      </ul>
+      <nav>
+        <ul class="nav-left navItem">
+          <li><router-link to="/">HOME</router-link></li>
+          <li>내가 찜한 콘텐츠</li>
+        </ul>
+        <ul class="nav-right navItem">
+          <li>검색</li>
+          <li>햄버거바</li>
+          <li><router-link to="/login">Login</router-link></li>
+        </ul>
+      </nav>
     </div>
   </nav>
 </template>
@@ -28,6 +31,7 @@ export default {
   justify-content: space-between;
   height: 3rem;
   padding: 0;
+  background-color: var(--gray8);
 }
 .logo {
   width: 10vw;

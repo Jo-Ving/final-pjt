@@ -3,6 +3,7 @@
     <BrowserRouter />
   </div>
 </template>
+
 <script>
 import BrowserRouter from "./BrowserRouter.vue";
 export default {
@@ -12,16 +13,19 @@ export default {
 </script>
 
 <style>
+@import "./assets/style.css";
+
+body {
+  margin: 0;
+  color: var(--gray0);
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
+  background-color: var(--gray8);
 }
 
 nav a {
@@ -31,17 +35,5 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
-}
-
-:root {
-  --gray8: "#111827";
-  --gray7: "#374151";
-  --gray6: "#4B5563";
-  --gray5: "#6B7280";
-  --gray4: "#9CA3AF";
-  --gray3: "#D1D5DB";
-  --gray2: "#E5E7EB";
-  --gray1: "#E5E7EB";
-  --gray0: "#F9FAFB";
 }
 </style>

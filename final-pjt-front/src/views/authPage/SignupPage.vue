@@ -23,20 +23,25 @@
           :labelName="`password*`"
           @inputFromChild="getPasswordConfirmValue"
         />
+        <p>{{ passwordEqualMessage }}</p>
       </div>
       <button @click="onSignUpButtonClick">Sign up</button>
     </form>
     <p>
       have an account?
-      <button>Log in here</button>
+      <button @click="toLoginPage">Log in here</button>
     </p>
   </div>
 </template>
 
 <script>
 import InputComponent from "../../components/InputComponent.vue";
-import { checkEmailValidate } from "../../utils/validators";
-import { EMAIL_VALIDATION_FALSE } from "../../assets/constants";
+import { checkEmailValidate, checkPasswordEqal } from "../../utils/validators";
+import {
+  EMAIL_VALIDATION_FALSE,
+  PASSWORD_EQUAL_FALSE,
+} from "../../assets/constants";
+import { toNextRouter } from "../../router/routingLogic";
 
 export default {
   name: "LoginPage",
@@ -46,6 +51,7 @@ export default {
       password: "",
       passwordConfirm: "",
       emailValidateMessage: "",
+      passwordEqualMessage: "",
     };
   },
   components: {
@@ -63,6 +69,12 @@ export default {
     },
     getPasswordConfirmValue(passwordConfirm) {
       this.passwordConfirm = passwordConfirm;
+      this.passwordEqualMessage = checkPasswordEqal(
+        this.password,
+        this.passwordConfirm
+      )
+        ? ""
+        : PASSWORD_EQUAL_FALSE;
     },
     onSignUpButtonClick(e) {
       console.log(e.target);
@@ -71,6 +83,10 @@ export default {
     resetInput() {
       this.email = "";
       this.password = "";
+      this.passwordConfirm = "";
+    },
+    toLoginPage() {
+      toNextRouter(this.$router, "login");
     },
   },
 };

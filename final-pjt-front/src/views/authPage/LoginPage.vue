@@ -21,7 +21,7 @@
     </form>
     <p>
       Don't have an account?
-      <button>Sign up here</button>
+      <button @click="toSignup">Sign up here</button>
     </p>
   </div>
 </template>
@@ -30,6 +30,7 @@
 import InputComponent from "../../components/InputComponent.vue";
 import { checkEmailValidate } from "../../utils/validators";
 import { EMAIL_VALIDATION_FALSE } from "../../assets/constants";
+import { toNextRouter } from "../../router/routingLogic";
 
 export default {
   name: "LoginPage",
@@ -60,6 +61,9 @@ export default {
     resetInput() {
       this.email = "";
       this.password = "";
+    },
+    toSignup() {
+      toNextRouter(this.$router, "signup");
     },
   },
 };

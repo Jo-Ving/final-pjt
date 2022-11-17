@@ -25,18 +25,65 @@ def movie_list(request):
     # else:
     #     return Response(status=status.HTTP_401_UNAUTHORIZED)
 
+@api_view(['GET', 'DELETE', 'PUT'])
+def movie_detail(request, movie_pk):
+    # review = review.objects.get(pk=review_pk)
+    movie = get_object_or_404(Movie, pk=movie_pk)
 
-# @api_view(['PUT', 'DELETE'])
-# def todo_update_delete(request, todo_pk):
-#     if request.user.is_authenticated:
-#         todo = get_object_or_404(Todo, pk=todo_pk)
-#         if request.method == 'PUT':
-#             serializer = TodoSerializer(todo, data=request.data)
-#             if serializer.is_valid(raise_exception=True):
-#                 serializer.save()
-#                 return Response(serializer.data)
-#         else:
-#             todo.delete()
-#             return Response({ 'id': todo_pk }, status=status.HTTP_204_NO_CONTENT)
-#     else:
-#         return Response(status=status.HTTP_401_UNAUTHORIZED)
+    if request.method == 'GET':
+        serializer = MovieSerializer(movie)
+        # print(serializer.data)
+        return Response(serializer.data)
+    
+    # elif request.method == 'DELETE':
+    #     movie.delete()
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
+
+    # elif request.method == 'PUT':
+    #     serializer = MovieSerializer(movie, data=request.data)
+    #     if serializer.is_valid(raise_exception=True):
+    #         serializer.save()
+    #         return Response(serializer.data)
+
+
+# @api_view(['GET'])
+# def review_list(request):
+#     if request.method == 'GET':
+#         # reviews = review.objects.all()
+#         reviews = get_list_or_404(Review)
+#         serializer = ReviewSerializer(reviews, many=True)
+#         return Response(serializer.data)
+
+
+# @api_view(['GET', 'DELETE', 'PUT'])
+# def review_detail(request, review_pk):
+#     # review = review.objects.get(pk=review_pk)
+#     review = get_object_or_404(Review, pk=review_pk)
+
+#     if request.method == 'GET':
+#         serializer = ReviewSerializer(review)
+#         return Response(serializer.data)
+
+#     elif request.method == 'DELETE':
+#         review.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+
+#     elif request.method == 'PUT':
+#         serializer = ReviewSerializer(review, data=request.data)
+#         if serializer.is_valid(raise_exception=True):
+#             serializer.save()
+#             return Response(serializer.data)
+
+    
+
+
+# @api_view(['POST'])
+# def review_create(request, review_pk):
+#     # review = review.objects.get(pk=review_pk)
+#     review = get_object_or_404(Review, pk=review_pk)
+#     serializer = ReviewSerializer(data=request.data)
+#     if serializer.is_valid(raise_exception=True):
+#         serializer.save(review=review)
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+

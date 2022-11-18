@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import MainPage from "../views/MainPage.vue";
 import DetailPage from "../views/DetailPage.vue";
+import MyFavorite from "../views/MyFavorite.vue";
 import LoginPage from "../views/authPage/LoginPage.vue";
 import SignupPage from "../views/authPage/SignupPage.vue";
 
@@ -25,9 +26,15 @@ const routes = [
   },
   {
     path: "/detail/:id",
-    name: "detail/:id",
+    name: "detail",
     component: DetailPage,
   },
+  {
+    path: "/myfavorite",
+    name: "myfavorite",
+    component: MyFavorite,
+  },
+
   // {
   //   path: "/auth",
   //   name: "auth",

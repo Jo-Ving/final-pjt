@@ -20,4 +20,5 @@ def signup(request):
 
 @api_view(['POST'])
 def login(request):
+    print(request,'👍')
     pass

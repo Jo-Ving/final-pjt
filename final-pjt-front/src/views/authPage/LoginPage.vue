@@ -31,6 +31,9 @@ import InputComponent from "../../components/InputComponent.vue";
 import { checkEmailValidate } from "../../utils/validators";
 import { EMAIL_VALIDATION_FALSE } from "../../assets/constants";
 import { toNextRouter } from "../../router/routingLogic";
+import axios from "axios";
+
+const SIGNUP_URL = `http://127.0.0.1:8000/accounts/login/`;
 
 export default {
   name: "LoginPage",
@@ -56,6 +59,7 @@ export default {
     },
     onLoginButtonClick(e) {
       console.log(e.target);
+      this.getUserInfo();
       this.resetInput();
     },
     resetInput() {
@@ -64,6 +68,19 @@ export default {
     },
     toSignup() {
       toNextRouter(this.$router, "signup");
+    },
+    getUserInfo() {
+      axios({
+        method: "get",
+        url: SIGNUP_URL,
+        data: {},
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     },
   },
 };

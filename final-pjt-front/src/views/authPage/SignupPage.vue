@@ -42,7 +42,7 @@ import {
   PASSWORD_EQUAL_FALSE,
 } from "../../assets/constants";
 import { toNextRouter } from "../../router/routingLogic";
-import { fetchSignup } from "../../api/authAPI";
+// import { fetchSignup } from "../../api/authAPI";
 
 import axios from "axios";
 
@@ -83,7 +83,12 @@ export default {
     },
     onSignUpButtonClick(e) {
       console.log(e.target);
-      fetchSignup({
+      // fetchSignup({
+      //   email: this.email,
+      //   password: this.password,
+      //   passwordConfirm: this.passwordConfirm,
+      // });
+      this.sendUserInfo({
         email: this.email,
         password: this.password,
         passwordConfirm: this.passwordConfirm,

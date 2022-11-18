@@ -13,9 +13,7 @@ export default {
     userInput: String,
   },
   data() {
-    return {
-      // userInput: "",
-    };
+    return {};
   },
   methods: {
     titleUpdate(e) {

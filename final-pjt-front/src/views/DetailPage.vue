@@ -15,9 +15,9 @@
         </p>
       </div>
       <div class="detail-right">
-        <form action="submit">
-          <input type="text" />
-          <button>리뷰 등록하기</button>
+        <form action="submit" @click.prevent>
+          <InputComponent :userInput="review" @inputFromChild="getReview" />
+          <button @click="onSubmitReview">리뷰 등록</button>
         </form>
         <div class="reviews">
           <h4>리뷰 목록</h4>
@@ -38,11 +38,46 @@
 <script>
 import ReviewComponent from "../components/ReviewComponent.vue";
 import SliderComponent from "../components/SliderComponent.vue";
+import InputComponent from "../components/InputComponent.vue";
+import axios from "axios";
+
 export default {
   name: "DetailPage",
+  data() {
+    return {
+      review: "",
+    };
+  },
   components: {
     ReviewComponent,
     SliderComponent,
+    InputComponent,
+  },
+  methods: {
+    getReview(reviewInput) {
+      console.log(reviewInput);
+      this.review = reviewInput;
+    },
+    onSubmitReview() {
+      console.log(this.review);
+    },
+    postReview() {
+      axios({
+        method: "post",
+        url: ``,
+        data: {
+          review_score: 5,
+          content: "리뷰내용입니다",
+          created_at: new Date(),
+        },
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 };
 </script>

@@ -51,12 +51,22 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES':(
+        # 전부 로그인 체크 안하고 통과, 로그인이 필요하면 데코레이션 사용해야한다
+        'rest_framework.permissions.AllowAny',
     )
 }
 
 from datetime import timedelta
+import datetime
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1440),
+    # 'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1440),
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    'SIGNING_KEY': 'SECRET',
+    'ALGORITHM': 'HS256',
+    'AUTH_HEADER_TYPES': ('JWT',),
 }
 
 MIDDLEWARE = [

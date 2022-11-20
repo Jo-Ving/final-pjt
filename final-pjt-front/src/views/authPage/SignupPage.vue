@@ -88,11 +88,7 @@ export default {
       //   password: this.password,
       //   passwordConfirm: this.passwordConfirm,
       // });
-      this.sendUserInfo({
-        email: this.email,
-        password: this.password,
-        passwordConfirm: this.passwordConfirm,
-      });
+      this.sendUserInfo();
       this.resetInput();
     },
     resetInput() {

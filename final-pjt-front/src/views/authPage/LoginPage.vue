@@ -64,16 +64,20 @@ export default {
     },
     resetInput() {
       this.email = "";
-      this.password = "";
+      this.password = "post";
     },
     toSignup() {
       toNextRouter(this.$router, "signup");
     },
     getUserInfo() {
       axios({
-        method: "get",
+        method: "post",
         url: SIGNUP_URL,
-        data: {},
+        headers: { "Content-Type": "application/json" },
+        data: {
+          email: this.email,
+          password: this.password,
+        },
       })
         .then((res) => {
           console.log(res);

@@ -72,9 +72,9 @@ export default {
     getUserInfo() {
       axios({
         method: "post",
-        url: `http://127.0.0.1:8000/accounts/login/`,
+        url: `http://127.0.0.1:8000/accounts/token/`,
         data: {
-          email: this.email,
+          username: this.email,
           password: this.password,
         },
       })

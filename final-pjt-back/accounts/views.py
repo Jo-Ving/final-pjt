@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import UserSerializer
 
-from django.contrib.auth import login as auth_login
+from django.contrib.auth import login as auth_login, authenticate
 from django.contrib import auth
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -38,6 +38,11 @@ def signup(request):
 
 @api_view(['POST'])
 def login(request):
+    print(request.data,'💦💦💦💦💦💦💦💦💦💦')
+    user = authenticate(
+        email = request.data.get('email'), password = request.data.get('password')
+    )
+    print(user,'💥💥💥💥💥💥💥💥💥💥💥')
     pass
     # serializer = UserSerializer(data=request.data)
     # print(request.data,'👍')

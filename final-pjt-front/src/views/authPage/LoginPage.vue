@@ -33,7 +33,7 @@ import { EMAIL_VALIDATION_FALSE } from "../../assets/constants";
 import { toNextRouter } from "../../router/routingLogic";
 import axios from "axios";
 
-const SIGNUP_URL = `http://127.0.0.1:8000/accounts/login/`;
+// const SIGNUP_URL = `http://127.0.0.1:8000/accounts/login/`;
 
 export default {
   name: "LoginPage",
@@ -72,8 +72,7 @@ export default {
     getUserInfo() {
       axios({
         method: "post",
-        url: SIGNUP_URL,
-        headers: { "Content-Type": "application/json" },
+        url: `http://127.0.0.1:8000/accounts/login/`,
         data: {
           email: this.email,
           password: this.password,

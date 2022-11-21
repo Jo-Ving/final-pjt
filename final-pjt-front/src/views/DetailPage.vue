@@ -17,7 +17,6 @@
       <div class="detail-right">
         <form action="submit" @click.prevent>
           <InputComponent :userInput="content" @inputFromChild="getReview" />
-          <input type="text" />
           <button @click="onReviewSubmit">리뷰 등록하기</button>
         </form>
         <div class="reviews">
@@ -61,13 +60,12 @@ export default {
       this.content = content;
       console.log(content);
     },
-    onReviewSubmit(e) {
+    onReviewSubmit() {
       fetchReview({
         username: this.username,
         content: this.content,
         reviewScore: this.reviewScore,
       });
-      console.log(e.target);
     },
   },
 };

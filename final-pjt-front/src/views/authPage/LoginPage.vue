@@ -31,7 +31,8 @@ import InputComponent from "../../components/InputComponent.vue";
 import { checkEmailValidate } from "../../utils/validators";
 import { EMAIL_VALIDATION_FALSE } from "../../assets/constants";
 import { toNextRouter } from "../../router/routingLogic";
-import axios from "axios";
+// import axios from "axios";
+import { fetchLogin } from "../../api/authAPI";
 
 // const SIGNUP_URL = `http://127.0.0.1:8000/accounts/login/`;
 
@@ -59,32 +60,36 @@ export default {
     },
     onLoginButtonClick(e) {
       console.log(e.target);
-      this.getUserInfo();
+      fetchLogin({
+        username: this.email,
+        password: this.password,
+      });
+      // this.getUserInfo();
       this.resetInput();
     },
     resetInput() {
       this.email = "";
-      this.password = "post";
+      this.password = "";
     },
     toSignup() {
       toNextRouter(this.$router, "signup");
     },
-    getUserInfo() {
-      axios({
-        method: "post",
-        url: `http://127.0.0.1:8000/accounts/token/`,
-        data: {
-          username: this.email,
-          password: this.password,
-        },
-      })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
+    // getUserInfo() {
+    //   axios({
+    //     method: "post",
+    //     url: `http://127.0.0.1:8000/accounts/token/`,
+    //     data: {
+    //       username: this.email,
+    //       password: this.password,
+    //     },
+    //   })
+    //     .then((res) => {
+    //       console.log(res);
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //     });
+    // },
   },
 };
 </script>

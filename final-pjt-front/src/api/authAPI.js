@@ -7,20 +7,23 @@ const instance = axios.create({
   timeout: 50000,
 });
 
-export const fetchLogin = async ({ email, password }) => {
+export const fetchLogin = async ({ username, password }) => {
   try {
-    const data = await instance.post("/login", { email, password });
+    const data = await instance.post("/accounts/token/", {
+      username,
+      password,
+    });
     return data;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const fetchSignup = async ({ email, password, passwordConfirm }) => {
+export const fetchSignup = async ({ username, password, passwordConfirm }) => {
   try {
     const data = await instance.post(`${apiEndpoint.signUp}`, {
-      email,
-      password,
+      username: username,
+      password: password,
       password_confirm: passwordConfirm,
     });
     console.log(data, "🎉");

@@ -82,3 +82,12 @@ export const fetchMovies = async (setData) => {
     console.log(err);
   }
 };
+
+export const fetchLikeState = async (setData) => {
+  try {
+    const data = await instance.post(apiEndpoint.movies);
+    setData(data);
+  } catch (err) {
+    console.log(err);
+  }
+};

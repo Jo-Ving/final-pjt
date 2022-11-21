@@ -11,7 +11,7 @@
           <p>{{ movie.release_date }}</p>
           <p>{{ movie.vote_average }}</p>
         </div>
-        <p>❤</p>
+        <button @click="onlikeButtonClick">❤</button>
       </div>
     </div>
   </div>
@@ -23,6 +23,7 @@ export default {
   props: {
     movie: Object,
   },
+  methods: { onlikeButtonClick() {} },
 };
 </script>
 

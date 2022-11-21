@@ -41,7 +41,7 @@ instance.interceptors.response.use(
 
 export const fetchLogin = async ({ username, password }) => {
   try {
-    const data = await instance.post("/accounts/token/", {
+    const data = await instance.post("/api/token/", {
       username,
       password,
     });
@@ -93,7 +93,6 @@ export const fetchMovies = async (setData) => {
 
 export const fetchLikeState = async (movieId) => {
   const url = movieUrl(apiEndpoint.movieLikeState, movieId);
-  print(url, "🐸");
   try {
     const data = await instance.post(url, {});
     console.log(data);

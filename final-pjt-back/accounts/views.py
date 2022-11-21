@@ -2,9 +2,9 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import UserSerializer
-
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib import auth
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -45,11 +45,7 @@ def login(request):
     print(user,'💥💥💥💥💥💥💥💥💥💥💥')
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 def profile(request):
-    # User = get_user_model()
-    person = User.objects.get(username=username)
-    context = {
-        'person': person,
-    }
-    return Response(request, 'accounts/profile.html', context)
+    serializer = UserSerializer(request.user)
+    return Response(serializer.data)

@@ -21,7 +21,8 @@ export default {
   },
   methods: {
     setData(data) {
-      this.movies = data;
+      this.movies = data.like_movies;
+      console.log(data)
     },
   },
 };

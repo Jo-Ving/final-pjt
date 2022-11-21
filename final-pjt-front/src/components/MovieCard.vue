@@ -1,17 +1,17 @@
 <template>
   <div class="movieCard">
     <img
-      src="https://www.movieflavor.com/images/10/101946ac09ca78ff19303144fe2e5676.jpeg"
+      :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
       alt=""
     />
     <div>
-      <h6 class="title">Title</h6>
+      <h6 class="title">{{ movie.title }}</h6>
       <div>
         <div>
-          <p>2022</p>
-          <p>TMDB 7.7</p>
+          <p>{{ movie.release_date }}</p>
+          <p>{{ movie.vote_average }}</p>
         </div>
-        <p>❤</p>
+        <button @click="onlikeButtonClick">❤</button>
       </div>
     </div>
   </div>
@@ -20,6 +20,10 @@
 <script>
 export default {
   name: "MovieCard",
+  props: {
+    movie: Object,
+  },
+  methods: { onlikeButtonClick() {} },
 };
 </script>
 

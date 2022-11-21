@@ -6,10 +6,10 @@ import MyFavorite from "../views/MyFavorite.vue";
 import LoginPage from "../views/authPage/LoginPage.vue";
 import SignupPage from "../views/authPage/SignupPage.vue";
 
-import {
-  getLocalStorage,
-  LOCALSTORAGE_KEYS,
-} from "../utils/localStorage/LocalStorage";
+// import {
+//   getLocalStorage,
+//   LOCALSTORAGE_KEYS,
+// } from "../utils/localStorage/LocalStorage";
 
 Vue.use(VueRouter);
 
@@ -57,16 +57,16 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  next();
+// router.beforeEach((to, from, next) => {
+//   next();
 
-  const storageJWT = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
-  if (storageJWT) {
-    next("/");
-  } else {
-    next("/login");
-  }
-  next();
-});
+//   const storageJWT = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
+//   if (storageJWT) {
+//     next("/");
+//   } else {
+//     next("/login");
+//   }
+//   next();
+// });
 
 export default router;

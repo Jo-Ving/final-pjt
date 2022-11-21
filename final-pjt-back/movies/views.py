@@ -78,11 +78,11 @@ def review_detail(request, review_pk):
 
 @api_view(['POST'])
 def review_create(request, movie_pk):
-    # review = review.objects.get(pk=review_pk)
-    movie = get_object_or_404(Movie, pk=movie_pk)
-    serializer = ReviewSerializer(data=request.data)
-    if serializer.is_valid(raise_exception=True):
-        serializer.save(movie=movie)
+    if request.method == 'POST':
+        # review = review.objects.get(pk=review_pk)
+        movie = get_object_or_404(Movie, pk=movie_pk)
+        serializer = ReviewSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(movie=movie, user=request.user)        
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
 

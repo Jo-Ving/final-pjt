@@ -15,9 +15,10 @@
         </p>
       </div>
       <div class="detail-right">
-        <form action="submit">
+        <form action="submit" @click.prevent>
+          <InputComponent :userInput="content" @inputFromChild="getReview" />
           <input type="text" />
-          <button>리뷰 등록하기</button>
+          <button @click="onReviewSubmit">리뷰 등록하기</button>
         </form>
         <div class="reviews">
           <h4>리뷰 목록</h4>
@@ -38,11 +39,36 @@
 <script>
 import ReviewComponent from "../components/ReviewComponent.vue";
 import SliderComponent from "../components/SliderComponent.vue";
+import InputComponent from "../components/InputComponent.vue";
+import { fetchReview } from "../api/authAPI";
+
 export default {
   name: "DetailPage",
   components: {
     ReviewComponent,
     SliderComponent,
+    InputComponent,
+  },
+  data() {
+    return {
+      username: "admin@gmail.com",
+      reviewScore: 3,
+      content: "",
+    };
+  },
+  methods: {
+    getReview(content) {
+      this.content = content;
+      console.log(content);
+    },
+    onReviewSubmit(e) {
+      fetchReview({
+        username: this.username,
+        content: this.content,
+        reviewScore: this.reviewScore,
+      });
+      console.log(e.target);
+    },
   },
 };
 </script>

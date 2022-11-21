@@ -1,3 +1,4 @@
+
 """
 Django settings for server project.
 
@@ -66,7 +67,7 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
     'SIGNING_KEY': 'SECRET',
     'ALGORITHM': 'HS256',
-    'AUTH_HEADER_TYPES': ('JWT',),
+    'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
 MIDDLEWARE = [

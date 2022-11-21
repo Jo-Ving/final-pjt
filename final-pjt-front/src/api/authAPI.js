@@ -1,4 +1,5 @@
 // import { toNextRouter } from "@/router/routingLogic";
+import router from "@/router";
 import {
   LOCALSTORAGE_KEYS,
   setLocalStorage,
@@ -18,12 +19,13 @@ instance.interceptors.response.use(
     // console.log(res.token.access, 13);
     const token = res.access ? res.access : res.token.access;
     setLocalStorage(LOCALSTORAGE_KEYS.userJWT, token);
-    // token
-    //   ? toNextRouter(this.$router, "signup")
-    //   : toNextRouter(this.$router, "main");
+    router.beforeEach((to, from, next) => {
+      token ? next("/") : next("/login");
+    });
   },
   (error) => {
     console.log(error, 16);
+    window.history.pushState(null, "", "/signup");
     // toNextRouter(this.$router, "signup");
   }
 );

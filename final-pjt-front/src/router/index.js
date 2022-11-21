@@ -57,16 +57,16 @@ const router = new VueRouter({
   routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//   next();
+router.beforeEach((to, from, next) => {
+  next();
 
-//   const storageJWT = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
-//   if (storageJWT) {
-//     next("/");
-//   } else {
-//     next("/login");
-//   }
-//   next();
-// });
+  const storageJWT = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
+  if (storageJWT) {
+    next("/");
+  } else {
+    next("/login");
+  }
+  next();
+});
 
 export default router;

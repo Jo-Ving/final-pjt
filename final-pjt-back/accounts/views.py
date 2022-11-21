@@ -43,24 +43,13 @@ def login(request):
         email = request.data.get('email'), password = request.data.get('password')
     )
     print(user,'💥💥💥💥💥💥💥💥💥💥💥')
-    pass
-    # serializer = UserSerializer(data=request.data)
-    # print(request.data,'👍')
-    # email = request.data.get('email')
-    # password = request.data.get('password')
-    # print(password,'🔮🔮🔮🔮🔮🔮')
-    # user = auth.authenticate(
-        # request,email =email
-    # )
-    # print(user)
 
 
-    # return Response(status = status.HTTP_201_CREATED)
-    # if request.user.is_authenticated:
-        # print('🤴🤴🤴🤴🤴🤴🤴')
-    
-    # auth_login(request.data,)
-    # return Response(status=status.HTTP_201_CREATED)
-
-    
-
+@api_view(['POST'])
+def profile(request):
+    # User = get_user_model()
+    person = User.objects.get(username=username)
+    context = {
+        'person': person,
+    }
+    return Response(request, 'accounts/profile.html', context)

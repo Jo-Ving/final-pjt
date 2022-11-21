@@ -68,7 +68,6 @@ def review_create(request, movie_pk):
 @api_view(['POST'])
 def likes(request, movie_pk):
     movie = Movie.objects.get(pk=movie_pk)
-    
     if movie.like_users.filter(pk=request.user.pk).exists():
         movie.like_users.remove(request.user)
         is_liked = False

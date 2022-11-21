@@ -6,16 +6,32 @@
     <SliderComponent />
     <SliderComponent />
     <SliderComponent />
+    <MoviesComponent :movies="movies" />
   </div>
 </template>
 
 <script>
 import SliderComponent from "../components/SliderComponent.vue";
 import CoverMovie from "../components/CoverMovie.vue";
+import MoviesComponent from "../components/MoviesComponent.vue";
+import { fetchMovies } from "../api/authAPI";
 
 export default {
   name: "MainPage",
-  components: { SliderComponent, CoverMovie },
+  components: { SliderComponent, CoverMovie, MoviesComponent },
+  data() {
+    return {
+      movies: [],
+    };
+  },
+  created() {
+    fetchMovies(this.setData);
+  },
+  methods: {
+    setData(data) {
+      this.movies = data;
+    },
+  },
 };
 </script>
 

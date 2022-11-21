@@ -6,6 +6,7 @@ class Genre(models.Model):
 
 class Movie(models.Model):
     title = models.CharField(max_length=50)
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movies')
     popularity = models.FloatField()
     poster_path = models.CharField(max_length=200)
     release_date = models.DateField()
@@ -21,6 +22,3 @@ class Review(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     review_score = models.FloatField()
-
-
-

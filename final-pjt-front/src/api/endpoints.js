@@ -6,4 +6,5 @@ export const apiEndpoint = {
   movies: `/movies/`,
   movieDetail: `/movies/19995/`,
   movieReview: `/movies/19995/reviews/`,
+  movieLike: `/movies/19995/likes/`,
 };

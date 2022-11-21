@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     onlikeButtonClick() {
-      fetchLikeState();
+      fetchLikeState(this.movie.id);
     },
   },
 };

@@ -6,12 +6,20 @@ import {
   setLocalStorage,
 } from "@/utils/localStorage/LocalStorage";
 import axios from "axios";
-import { apiEndpoint, backendBaseUrl } from "./endpoints";
+import { apiEndpoint, backendBaseUrl, movieUrl } from "./endpoints";
+
+const checkAuth = () => {
+  const jwt = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
+  if (jwt) {
+    return `Bearer ${jwt}`;
+  }
+  return "";
+};
 
 const instance = axios.create({
   baseURL: backendBaseUrl,
   headers: {
-    Authorization: `Bearer ${getLocalStorage(LOCALSTORAGE_KEYS.userJWT) || ""}`,
+    Authorization: checkAuth(),
   },
   timeout: 50000,
 });
@@ -83,10 +91,22 @@ export const fetchMovies = async (setData) => {
   }
 };
 
-export const fetchLikeState = async () => {
+export const fetchLikeState = async (movieId) => {
+  const url = movieUrl(apiEndpoint.movieLikeState, movieId);
+  print(url, "🐸");
   try {
-    const data = await instance.post(apiEndpoint.movieLike, {});
+    const data = await instance.post(url, {});
     console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const fetchLikeMovies = async (setData) => {
+  try {
+    const data = await instance.get(apiEndpoint.likedMovies);
+    console.log(data, "hello");
+    setData(data);
   } catch (err) {
     console.log(err);
   }

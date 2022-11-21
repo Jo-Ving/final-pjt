@@ -17,33 +17,14 @@ def movie_list(request):
             movies = Movie.objects.all()
             serializer = MovieSerializer(movies, many=True)
             return Response(serializer.data)
-        # else:
-        #     serializer = MovieSerializer(data=request.data)
-        #     if serializer.is_valid(raise_exception=True):
-        #         serializer.save(user = request.user)
-        #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    # else:
-    #     return Response(status=status.HTTP_401_UNAUTHORIZED)
 
-@api_view(['GET', 'DELETE', 'PUT'])
+
+@api_view(['GET'])
 def movie_detail(request, movie_pk):
-    # review = review.objects.get(pk=review_pk)
     movie = get_object_or_404(Movie, pk=movie_pk)
-
     if request.method == 'GET':
         serializer = MovieSerializer(movie)
-        # print(serializer.data)
         return Response(serializer.data)
-    
-    # elif request.method == 'DELETE':
-    #     movie.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
-
-    # elif request.method == 'PUT':
-    #     serializer = MovieSerializer(movie, data=request.data)
-    #     if serializer.is_valid(raise_exception=True):
-    #         serializer.save()
-    #         return Response(serializer.data)
 
 
 @api_view(['GET'])
@@ -57,7 +38,6 @@ def review_list(request):
 
 @api_view(['GET', 'DELETE', 'PUT'])
 def review_detail(request, review_pk):
-    # review = review.objects.get(pk=review_pk)
     review = get_object_or_404(Review, pk=review_pk)
 
     if request.method == 'GET':
@@ -74,8 +54,6 @@ def review_detail(request, review_pk):
             serializer.save()
             return Response(serializer.data)
 
-    
-
 @api_view(['POST'])
 def review_create(request, movie_pk):
     if request.method == 'POST':
@@ -83,6 +61,18 @@ def review_create(request, movie_pk):
         movie = get_object_or_404(Movie, pk=movie_pk)
         serializer = ReviewSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(movie=movie, user=request.user) 
+            serializer.save(movie=movie, user=request.user)        
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
+@api_view(['POST'])
+def likes(request, movie_pk):
+    movie = Movie.objects.get(pk=movie_pk)
+    
+    if movie.like_users.filter(pk=request.user.pk).exists():
+        movie.like_users.remove(request.user)
+        is_liked = False
+    else:
+        movie.like_users.add(request.user)
+        is_liked = True
+    return Response(is_liked)

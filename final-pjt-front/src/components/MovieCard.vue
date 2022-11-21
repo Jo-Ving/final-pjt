@@ -18,12 +18,17 @@
 </template>
 
 <script>
+import { fetchLikeState } from "../api/authAPI";
 export default {
   name: "MovieCard",
   props: {
     movie: Object,
   },
-  methods: { onlikeButtonClick() {} },
+  methods: {
+    onlikeButtonClick() {
+      fetchLikeState();
+    },
+  },
 };
 </script>
 

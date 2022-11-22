@@ -74,3 +74,35 @@ def likes(request, movie_pk):
         movie.like_users.add(request.user)
         is_liked = True
     return Response(is_liked)
+
+@api_view(['POST'])
+def picks(request, movie_pk):
+    movie = Movie.objects.get(pk=movie_pk)
+    movie.pick_users.add(request.user)
+    return Response(status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def review_likes(request, review_pk):
+    review = Review.objects.get(pk=review_pk)
+    if review.review_like_users.filter(pk=request.user.pk).exists():
+        review.like_users.remove(request.user)
+        review_is_liked = False
+    else:
+        review.like_users.add(request.user)
+        review_is_liked = True
+    return Response(review_is_liked)
+
+def recommend1(request):
+    recent_movies = Movie.objects.all().order_by('-release_date', '-vote_average')[:20] 
+    hot_movies =  Movie.objects.all().order_by('-vote_count', '-vote_average')[:20]
+    serializer1 = MovieSerializer(recent_movies, many=True)
+    serializer2 = MovieSerializer(hot_movies, many=True)
+    print(request.user)
+    data = {
+        'recent_movies' : serializer1.data,
+        'hot_movies' : serializer2.data
+    }
+    
+    return Response(data)
+
+

@@ -7,20 +7,23 @@
         @inputFromChild="onSearch"
       />
     </form>
-    <ul>
+    <MoviesComponent :movies="searchedMovies" />
+
+    <!-- <ul>
       <li v-for="movie in searchedMovies" :key="movie.id">
         {{ movie.title }}
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
 <script>
 import InputComponent from "../components/InputComponent.vue";
 import { fetchMovies } from "../api/authAPI";
+import MoviesComponent from "../components/MoviesComponent.vue";
 export default {
   name: "SearchPage",
-  components: { InputComponent },
+  components: { InputComponent, MoviesComponent },
   data() {
     return {
       searchInput: "",

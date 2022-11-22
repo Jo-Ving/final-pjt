@@ -5,6 +5,7 @@ import DetailPage from "../views/DetailPage.vue";
 import MyFavorite from "../views/MyFavorite.vue";
 import LoginPage from "../views/authPage/LoginPage.vue";
 import SignupPage from "../views/authPage/SignupPage.vue";
+import SearchPage from "../views/SearchPage.vue";
 
 // import {
 //   getLocalStorage,
@@ -38,6 +39,11 @@ const routes = [
     path: "/myfavorite",
     name: "myfavorite",
     component: MyFavorite,
+  },
+  {
+    path: "/search",
+    name: "search",
+    component: SearchPage,
   },
 
   // {

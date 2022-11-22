@@ -1,0 +1,54 @@
+<template>
+  <div>
+    <form action="submit" @click.prevent>
+      <InputComponent
+        :userInput="searchInput"
+        :labelName="`검색`"
+        @inputFromChild="onSearch"
+      />
+    </form>
+    <ul>
+      <li v-for="movie in searchedMovies" :key="movie.id">
+        {{ movie.title }}
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+import InputComponent from "../components/InputComponent.vue";
+import { fetchMovies } from "../api/authAPI";
+export default {
+  name: "SearchPage",
+  components: { InputComponent },
+  data() {
+    return {
+      searchInput: "",
+      movies: [],
+      searchedMovies: [],
+    };
+  },
+  methods: {
+    onSearch(e) {
+      console.log(this.movies);
+      console.log(e);
+      this.serchedMovies(e);
+    },
+    setData(movies) {
+      this.movies = movies;
+    },
+    serchedMovies(input) {
+      this.searchedMovies = [];
+      for (const movie of this.movies) {
+        const isInclude = movie.title.includes(input);
+        isInclude ? this.searchedMovies.push(movie) : "";
+      }
+    },
+  },
+  created() {
+    fetchMovies(this.setData);
+  },
+};
+</script>
+
+<style></style>

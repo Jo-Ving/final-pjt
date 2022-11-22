@@ -11,6 +11,7 @@ import { apiEndpoint, backendBaseUrl, movieUrl } from "./endpoints";
 
 const checkAuth = () => {
   const jwt = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
+  console.log(jwt);
   if (jwt) {
     return `Bearer ${jwt}`;
   }
@@ -30,10 +31,6 @@ instance.interceptors.response.use(
     const res = response.data;
     console.log(res);
     return res;
-    // const token = res.access || res?.token.access;
-    // if (token) {
-    // setLocalStorage(LOCALSTORAGE_KEYS.userJWT, token);
-    // }
   },
   (error) => {
     console.log(error, 16);
@@ -42,12 +39,13 @@ instance.interceptors.response.use(
 
 const authResponseLogic = (token) => {
   token ? setLocalStorage(LOCALSTORAGE_KEYS.userJWT, token) : "";
-  router.push({ path: "main" });
+  router.push({ path: "/" });
+  location.reload();
 };
 
 export const fetchLogin = async ({ username, password }) => {
   try {
-    const data = await instance.post("/accounts/token/", {
+    const data = await instance.post("/api/token/", {
       username,
       password,
     });
@@ -98,10 +96,21 @@ export const fetchMovies = async (setData) => {
   }
 };
 
+export const fetchMovieDetail = async (setData, movieId) => {
+  const url = movieUrl(apiEndpoint.movieDetail, movieId);
+
+  try {
+    const data = await instance.get(url);
+    setData(data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const fetchLikeState = async (movieId) => {
   const url = movieUrl(apiEndpoint.movieLikeState, movieId);
   try {
-    const data = await instance.post(url, {});
+    const data = await instance.post(url);
     console.log(data);
   } catch (err) {
     console.log(err);

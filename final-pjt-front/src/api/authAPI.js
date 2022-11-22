@@ -11,7 +11,6 @@ import { apiEndpoint, backendBaseUrl, movieUrl } from "./endpoints";
 
 const checkAuth = () => {
   const jwt = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
-  console.log(jwt);
   if (jwt) {
     return `Bearer ${jwt}`;
   }
@@ -49,7 +48,7 @@ export const fetchLogin = async ({ username, password }) => {
       username,
       password,
     });
-    console.log(data);
+    console.log(data, "🎈");
     const token = data.access;
     authResponseLogic(token);
     // router.push({ path: "/" });

@@ -52,6 +52,9 @@ export const fetchLogin = async ({ username, password }) => {
     console.log(data);
     const token = data.access;
     authResponseLogic(token);
+    // router.push({ path: "/" });
+    // location.reload();
+
     return data;
   } catch (err) {
     console.log(err);
@@ -68,6 +71,8 @@ export const fetchSignup = async ({ username, password, passwordConfirm }) => {
     console.log(data, "🎉");
     const token = data.token.access;
     authResponseLogic(token);
+    // router.push({ path: "/pickRecommendData" });
+    // location.reload();
   } catch (err) {
     console.log(err, "🎇");
   }
@@ -132,7 +137,7 @@ export const fetchLikeState = async (movieId) => {
   const url = movieUrl(apiEndpoint.movieLikeState, movieId);
   try {
     const data = await instance.post(url);
-    console.log(data);
+    console.log(data, "🎈");
   } catch (err) {
     console.log(err);
   }
@@ -142,6 +147,15 @@ export const fetchLikeMovies = async (setData) => {
   try {
     const data = await instance.get(apiEndpoint.likedMovies);
     setData(data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const pickRecommendMovies = async () => {
+  try {
+    const data = await instance.post();
+    console.log(data);
   } catch (err) {
     console.log(err);
   }

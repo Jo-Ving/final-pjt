@@ -11,6 +11,8 @@ export const apiEndpoint = {
   movieReview: `/movies/ID/reviews/`,
   movieReviewCreate: `/movies/ID/reviews/`,
   movieLikeState: `/movies/ID/likes/`,
+
+  // moviePickMoies: `/movies/ID/likes/`,
 };
 
 export const movieUrl = (baseUrl, movieId) => {

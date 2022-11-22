@@ -47,5 +47,6 @@ def login(request):
 
 @api_view(['GET'])
 def profile(request):
+    print(request.user, '💥💥💥💥💥💥')
     serializer = UserSerializer(request.user)
     return Response(serializer.data)

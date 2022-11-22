@@ -3,15 +3,12 @@
     <div class="container">
       <div class="detail-left">
         <img
-          src="https://img.vogue.co.kr/vogue/2019/04/style_5ca1c2b8da359.jpg"
+          :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
           alt=""
         />
-        <h4>Title</h4>
+        <h4>{{ movie.title }}</h4>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim magnam
-          ducimus totam architecto minima, veritatis omnis mollitia facere
-          ratione harum, unde qui pariatur alias tenetur quos, animi earum!
-          Ducimus, id.
+          {{ movie.overview }}
         </p>
       </div>
       <div class="detail-right">
@@ -39,7 +36,7 @@
 import ReviewComponent from "../components/ReviewComponent.vue";
 import SliderComponent from "../components/SliderComponent.vue";
 import InputComponent from "../components/InputComponent.vue";
-import { fetchReview } from "../api/authAPI";
+import { fetchMovieDetail, fetchReview } from "../api/authAPI";
 
 export default {
   name: "DetailPage",
@@ -50,10 +47,16 @@ export default {
   },
   data() {
     return {
+      movie: {},
       username: "admin@gmail.com",
       reviewScore: 3,
       content: "",
     };
+  },
+  created() {
+    const splitedLocation = location.pathname.split("/");
+    const movieId = splitedLocation[splitedLocation.length - 1];
+    fetchMovieDetail(this.setData, movieId);
   },
   methods: {
     getReview(content) {
@@ -66,6 +69,10 @@ export default {
         content: this.content,
         reviewScore: this.reviewScore,
       });
+    },
+    setData(movie) {
+      console.log(movie);
+      this.movie = movie;
     },
   },
 };

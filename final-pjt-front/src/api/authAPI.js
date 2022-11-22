@@ -1,5 +1,6 @@
 // import { toNextRouter } from "@/router/routingLogic";
 // import router from "@/router";
+import router from "@/router";
 import {
   getLocalStorage,
   LOCALSTORAGE_KEYS,
@@ -10,6 +11,7 @@ import { apiEndpoint, backendBaseUrl, movieUrl } from "./endpoints";
 
 const checkAuth = () => {
   const jwt = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
+  console.log(jwt);
   if (jwt) {
     return `Bearer ${jwt}`;
   }
@@ -29,15 +31,17 @@ instance.interceptors.response.use(
     const res = response.data;
     console.log(res);
     return res;
-    // const token = res.access || res?.token.access;
-    // if (token) {
-    // setLocalStorage(LOCALSTORAGE_KEYS.userJWT, token);
-    // }
   },
   (error) => {
     console.log(error, 16);
   }
 );
+
+const authResponseLogic = (token) => {
+  token ? setLocalStorage(LOCALSTORAGE_KEYS.userJWT, token) : "";
+  router.push({ path: "/" });
+  location.reload();
+};
 
 export const fetchLogin = async ({ username, password }) => {
   try {
@@ -45,8 +49,9 @@ export const fetchLogin = async ({ username, password }) => {
       username,
       password,
     });
+    console.log(data);
     const token = data.access;
-    setLocalStorage(LOCALSTORAGE_KEYS.userJWT, token);
+    authResponseLogic(token);
     return data;
   } catch (err) {
     console.log(err);
@@ -62,7 +67,7 @@ export const fetchSignup = async ({ username, password, passwordConfirm }) => {
     });
     console.log(data, "🎉");
     const token = data.token.access;
-    setLocalStorage(LOCALSTORAGE_KEYS.userJWT, token);
+    authResponseLogic(token);
   } catch (err) {
     console.log(err, "🎇");
   }
@@ -91,10 +96,21 @@ export const fetchMovies = async (setData) => {
   }
 };
 
+export const fetchMovieDetail = async (setData, movieId) => {
+  const url = movieUrl(apiEndpoint.movieDetail, movieId);
+
+  try {
+    const data = await instance.get(url);
+    setData(data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const fetchLikeState = async (movieId) => {
   const url = movieUrl(apiEndpoint.movieLikeState, movieId);
   try {
-    const data = await instance.post(url, {});
+    const data = await instance.post(url);
     console.log(data);
   } catch (err) {
     console.log(err);

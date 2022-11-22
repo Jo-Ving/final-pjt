@@ -1,5 +1,5 @@
 <template>
-  <div class="movieCard">
+  <div class="movieCard" @click="onMovieClick">
     <img
       :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
       alt=""
@@ -19,6 +19,7 @@
 
 <script>
 import { fetchLikeState } from "../api/authAPI";
+// import { toNextRouter } from "../router/routingLogic";
 export default {
   name: "MovieCard",
   props: {
@@ -27,6 +28,12 @@ export default {
   methods: {
     onlikeButtonClick() {
       fetchLikeState(this.movie.id);
+    },
+    onMovieClick() {
+      this.$router.push({
+        name: "detail",
+        params: { id: this.movie.id },
+      });
     },
   },
 };

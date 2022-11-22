@@ -9,6 +9,11 @@ import BrowserRouter from "./BrowserRouter.vue";
 export default {
   name: "app",
   components: { BrowserRouter },
+  data() {
+    return {
+      isUserLoggedIn: false,
+    };
+  },
 };
 </script>
 

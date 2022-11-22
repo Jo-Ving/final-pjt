@@ -8,7 +8,9 @@
           <li><router-link to="/myfavorite">내가 찜한 콘텐츠</router-link></li>
         </ul>
         <ul class="nav-right navItem">
-          <li>검색</li>
+          <li>
+            <router-link to="/search">검색</router-link>
+          </li>
           <li>햄버거바</li>
 
           <li v-if="!isUserLoggedIn">

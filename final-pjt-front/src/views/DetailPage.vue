@@ -36,7 +36,7 @@
 import ReviewComponent from "../components/ReviewComponent.vue";
 import SliderComponent from "../components/SliderComponent.vue";
 import InputComponent from "../components/InputComponent.vue";
-import { fetchMovieDetail, fetchReview } from "../api/authAPI";
+import { fetchMovieDetail, createReview } from "../api/authAPI";
 
 export default {
   name: "DetailPage",
@@ -48,7 +48,6 @@ export default {
   data() {
     return {
       movie: {},
-      username: "admin@gmail.com",
       reviewScore: 3,
       content: "",
     };
@@ -64,10 +63,13 @@ export default {
       console.log(content);
     },
     onReviewSubmit() {
-      fetchReview({
-        username: this.username,
+      const splitedLocation = location.pathname.split("/");
+      const movieId = splitedLocation[splitedLocation.length - 1];
+      // console.log(this.movie.movieId);
+      createReview({
         content: this.content,
         reviewScore: this.reviewScore,
+        movieId: movieId,
       });
     },
     setData(movie) {

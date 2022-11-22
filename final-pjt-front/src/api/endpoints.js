@@ -1,4 +1,5 @@
 export const backendBaseUrl = `http://127.0.0.1:8000`;
+export const posterBaseUrl = `https://image.tmdb.org/t/p/original/`;
 
 export const apiEndpoint = {
   signUp: `/accounts/signup/`,
@@ -8,6 +9,7 @@ export const apiEndpoint = {
   movies: `/movies/`,
   movieDetail: `/movies/ID/`,
   movieReview: `/movies/ID/reviews/`,
+  movieReviewCreate: `/movies/ID/reviews/`,
   movieLikeState: `/movies/ID/likes/`,
 };
 

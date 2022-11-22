@@ -2,6 +2,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import UserSerializer
+from movies.serializers import MovieSerializer
+from movies.models import Movie
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib import auth
 from django.contrib.auth import get_user_model
@@ -47,6 +49,8 @@ def login(request):
 
 @api_view(['GET'])
 def profile(request):
-    print(request.user, '💥💥💥💥💥💥')
-    serializer = UserSerializer(request.user)
+    movies = Movie.objects.filter(like_users = request.user)
+    print(request.user)
+    print(movies,'💥💥💥')
+    serializer = MovieSerializer(movies, many=True)
     return Response(serializer.data)

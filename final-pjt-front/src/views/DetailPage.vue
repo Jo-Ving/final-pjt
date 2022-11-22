@@ -1,15 +1,35 @@
 <template>
   <div>
-    <div class="container">
+    <div style="padding:1rem; margin:1rem;">
       <div class="detail-left">
-        <img
-          :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
-          alt=""
-        />
-        <h4>{{ movie.title }}</h4>
-        <p>
-          {{ movie.overview }}
-        </p>
+        <div class="d-flex flex-column">
+          <div>
+            <img
+              class=""
+              :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
+              alt=""
+            />
+            <h4>{{ movie.title }}</h4>
+          </div>
+          <div class="vstack gap-1">
+            <div class="hstack gap-3">
+              <p>감독</p>
+              <p>돼지</p>
+            </div>
+            <div class="hstack gap-3">
+              <p>내용</p>
+              <p>돼지</p>
+            </div>
+            <div class="hstack gap-3">
+              <p>감독</p>
+              <p>돼지</p>
+            </div>
+          </div>
+          <p style="text-align: left">
+            {{ movie.overview }}
+          </p>
+
+        </div>
       </div>
       <div class="detail-right">
         <form action="submit" @click.prevent>
@@ -92,6 +112,11 @@ export default {
 </script>
 
 <style scoped>
+* {
+  margin: 0;
+  padding: 0;
+}
+
 img {
   width: 280px;
 }

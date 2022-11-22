@@ -1,7 +1,8 @@
 <template>
-  <div class="movieCard" v-if="movie">
+<div style="display:inline-block;">
+  <div style="padding:1rem; margin:1rem;" v-if="movie">
     <div @click="onMovieClick">
-      <img
+      <img style="width: 262px; height: 393px; padding-top: 2px; margin-top: 15px; border-radius: 16px;"
         :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
         alt=""
       />
@@ -9,14 +10,15 @@
         <h6 class="title">{{ movie?.title }}</h6>
         <div>
           <div>
-            <p>{{ movie?.release_date }}</p>
-            <p>{{ movie?.vote_average }}</p>
+            <h6 class="title">{{ movie?.release_date }}</h6>
+            <h6 class="title">{{ movie?.vote_average }}</h6>
           </div>
         </div>
       </div>
     </div>
     <button @click="onlikeButtonClick">❤</button>
   </div>
+</div>
 </template>
 
 <script>
@@ -42,11 +44,11 @@ export default {
 </script>
 
 <style scoped>
-.movieCard {
+/* .movieCard {
   width: 183px;
   height: 275px;
   border: 1px solid white;
-}
+} */
 img {
   width: 80%;
   height: 80%;

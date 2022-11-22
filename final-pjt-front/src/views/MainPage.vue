@@ -3,22 +3,21 @@
     <!-- header1  -->
     <CoverMovie />
     <!-- movies you must watch  -->
+    <!-- <SliderComponent />
     <SliderComponent />
-    <SliderComponent />
-    <SliderComponent />
+    <SliderComponent /> -->
     <MoviesComponent :movies="movies" />
   </div>
 </template>
 
 <script>
-import SliderComponent from "../components/SliderComponent.vue";
 import CoverMovie from "../components/CoverMovie.vue";
 import MoviesComponent from "../components/MoviesComponent.vue";
 import { fetchLikeMovies, fetchMovies } from "../api/authAPI";
 
 export default {
   name: "MainPage",
-  components: { SliderComponent, CoverMovie, MoviesComponent },
+  components: {  CoverMovie, MoviesComponent },
   data() {
     return {
       movies: [],

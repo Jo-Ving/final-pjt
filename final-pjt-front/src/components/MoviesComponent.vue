@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <ul>
+  <div class="container">
       <MovieCard v-for="(movie, index) in movies" :key="index" :movie="movie" />
-    </ul>
   </div>
 </template>
 
@@ -18,4 +16,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+/* s */
+</style>

@@ -19,11 +19,11 @@
         <div class="reviews">
           <h4>리뷰 목록</h4>
           <ul>
-            <ReviewComponent />
-            <ReviewComponent />
-            <ReviewComponent />
-            <ReviewComponent />
-            <ReviewComponent />
+            <ReviewComponent
+              v-for="review in reviews"
+              :review="review"
+              :key="review.id"
+            />
           </ul>
         </div>
       </div>
@@ -36,7 +36,7 @@
 import ReviewComponent from "../components/ReviewComponent.vue";
 import SliderComponent from "../components/SliderComponent.vue";
 import InputComponent from "../components/InputComponent.vue";
-import { fetchMovieDetail, createReview } from "../api/authAPI";
+import { fetchMovieDetail, createReview, fetchReview } from "../api/authAPI";
 
 export default {
   name: "DetailPage",
@@ -48,6 +48,8 @@ export default {
   data() {
     return {
       movie: {},
+      movieId: 0,
+      reviews: [],
       reviewScore: 3,
       content: "",
     };
@@ -55,26 +57,34 @@ export default {
   created() {
     const splitedLocation = location.pathname.split("/");
     const movieId = splitedLocation[splitedLocation.length - 1];
+    this.movieId = movieId;
     fetchMovieDetail(this.setData, movieId);
+    fetchReview({ movieId }, this.setReviewData);
   },
   methods: {
     getReview(content) {
       this.content = content;
-      console.log(content);
     },
     onReviewSubmit() {
       const splitedLocation = location.pathname.split("/");
       const movieId = splitedLocation[splitedLocation.length - 1];
-      // console.log(this.movie.movieId);
       createReview({
         content: this.content,
         reviewScore: this.reviewScore,
         movieId: movieId,
       });
+      fetchReview({ movieId: this.movieId }, this.setReviewData);
+      this.resetInput();
     },
     setData(movie) {
       console.log(movie);
       this.movie = movie;
+    },
+    setReviewData(reviews) {
+      this.reviews = reviews;
+    },
+    resetInput() {
+      this.content = "";
     },
   },
 };

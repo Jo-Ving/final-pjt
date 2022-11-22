@@ -88,6 +88,19 @@ export const createReview = async ({ content, reviewScore, movieId }) => {
   }
 };
 
+export const fetchReview = async ({ movieId }, setData) => {
+  const url = movieUrl(apiEndpoint.movieReviewCreate, movieId);
+  console.log(url);
+  try {
+    const data = await instance.get(url);
+    console.log(data);
+    setData(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export let cachedMovies = [];
 
 export const fetchMovies = async (setData) => {

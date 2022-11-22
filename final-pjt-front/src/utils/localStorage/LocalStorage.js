@@ -7,6 +7,10 @@ export const getLocalStorage = (key) => {
   return JSON.parse(getLocalStorage);
 };
 
+export const deleteLocalStorage = (key) => {
+  localStorage.removeItem(key);
+};
+
 export const LOCALSTORAGE_KEYS = Object.freeze({
   userJWT: "userJWT",
 });

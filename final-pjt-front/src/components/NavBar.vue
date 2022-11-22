@@ -10,7 +10,13 @@
         <ul class="nav-right navItem">
           <li>검색</li>
           <li>햄버거바</li>
-          <li><router-link to="/login">Login</router-link></li>
+
+          <li v-if="!isUserLoggedIn">
+            <router-link to="/login">Login</router-link>
+          </li>
+          <li v-if="isUserLoggedIn" @click="onLogout">
+            <router-link to="/login">Logout</router-link>
+          </li>
         </ul>
       </nav>
     </div>
@@ -18,8 +24,28 @@
 </template>
 
 <script>
+import {
+  getLocalStorage,
+  deleteLocalStorage,
+  LOCALSTORAGE_KEYS,
+} from "../utils/localStorage/LocalStorage";
 export default {
   name: "NavBar",
+  data() {
+    return {
+      isUserLoggedIn: false,
+    };
+  },
+  created() {
+    const jwt = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
+    this.isUserLoggedIn = jwt ? true : false;
+  },
+  methods: {
+    onLogout() {
+      deleteLocalStorage(LOCALSTORAGE_KEYS.userJWT);
+      this.isUserLoggedIn = false;
+    },
+  },
 };
 </script>
 

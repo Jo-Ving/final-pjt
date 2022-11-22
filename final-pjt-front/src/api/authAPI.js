@@ -1,5 +1,6 @@
 // import { toNextRouter } from "@/router/routingLogic";
 // import router from "@/router";
+import router from "@/router";
 import {
   getLocalStorage,
   LOCALSTORAGE_KEYS,
@@ -39,14 +40,20 @@ instance.interceptors.response.use(
   }
 );
 
+const authResponseLogic = (token) => {
+  token ? setLocalStorage(LOCALSTORAGE_KEYS.userJWT, token) : "";
+  router.push({ path: "main" });
+};
+
 export const fetchLogin = async ({ username, password }) => {
   try {
-    const data = await instance.post("/api/token/", {
+    const data = await instance.post("/accounts/token/", {
       username,
       password,
     });
+    console.log(data);
     const token = data.access;
-    setLocalStorage(LOCALSTORAGE_KEYS.userJWT, token);
+    authResponseLogic(token);
     return data;
   } catch (err) {
     console.log(err);
@@ -62,7 +69,7 @@ export const fetchSignup = async ({ username, password, passwordConfirm }) => {
     });
     console.log(data, "🎉");
     const token = data.token.access;
-    setLocalStorage(LOCALSTORAGE_KEYS.userJWT, token);
+    authResponseLogic(token);
   } catch (err) {
     console.log(err, "🎇");
   }

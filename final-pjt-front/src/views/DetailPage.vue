@@ -74,6 +74,7 @@ export default {
         movieId: movieId,
       });
       fetchReview({ movieId: this.movieId }, this.setReviewData);
+      this.$forceUpdate();
       this.resetInput();
     },
     setData(movie) {

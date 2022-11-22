@@ -32,7 +32,11 @@ export default {
     onSearch(e) {
       console.log(this.movies);
       console.log(e);
-      this.serchedMovies(e);
+      if (e.trim() !== "") {
+        this.serchedMovies(e);
+      } else {
+        this.searchedMovies = [];
+      }
     },
     setData(movies) {
       this.movies = movies;

@@ -1,15 +1,15 @@
 <template>
-  <div class="movieCard" @click="onMovieClick">
+  <div class="movieCard" @click="onMovieClick" v-if="movie">
     <img
       :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
       alt=""
     />
     <div>
-      <h6 class="title">{{ movie.title }}</h6>
+      <h6 class="title">{{ movie?.title }}</h6>
       <div>
         <div>
-          <p>{{ movie.release_date }}</p>
-          <p>{{ movie.vote_average }}</p>
+          <p>{{ movie?.release_date }}</p>
+          <p>{{ movie?.vote_average }}</p>
         </div>
         <button @click="onlikeButtonClick">❤</button>
       </div>

@@ -73,10 +73,11 @@ export const fetchSignup = async ({ username, password, passwordConfirm }) => {
   }
 };
 
-export const fetchReview = async ({ username, content, reviewScore }) => {
-  console.log(username, content, reviewScore);
+export const createReview = async ({ content, reviewScore, movieId }) => {
+  const url = movieUrl(apiEndpoint.movieReviewCreate, movieId);
+  console.log(url);
   try {
-    const data = await instance.post(`/movies/19995/reviews/`, {
+    const data = await instance.post(url, {
       content,
       review_score: reviewScore,
     });

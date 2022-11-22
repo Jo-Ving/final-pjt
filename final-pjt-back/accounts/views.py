@@ -1,12 +1,16 @@
+from django.contrib import auth
+from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.models import User
+from movies.models import Movie
+from movies.serializers import MovieSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import UserSerializer
-from django.contrib.auth import login as auth_login, authenticate
-from django.contrib import auth
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+from .serializers import UserSerializer
+
 
 @api_view(['POST'])
 def signup(request):
@@ -47,5 +51,8 @@ def login(request):
 
 @api_view(['GET'])
 def profile(request):
-    serializer = UserSerializer(request.user)
+    movies = Movie.objects.filter(like_users = request.user)
+    print(request.user)
+    print(movies,'💥💥💥')
+    serializer = MovieSerializer(movies, many=True)
     return Response(serializer.data)

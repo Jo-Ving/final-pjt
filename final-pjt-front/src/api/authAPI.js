@@ -141,7 +141,6 @@ export const fetchLikeState = async (movieId) => {
 export const fetchLikeMovies = async (setData) => {
   try {
     const data = await instance.get(apiEndpoint.likedMovies);
-    console.log(data, "hello");
     setData(data);
   } catch (err) {
     console.log(err);

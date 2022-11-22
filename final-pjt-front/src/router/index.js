@@ -6,11 +6,7 @@ import MyFavorite from "../views/MyFavorite.vue";
 import LoginPage from "../views/authPage/LoginPage.vue";
 import SignupPage from "../views/authPage/SignupPage.vue";
 import SearchPage from "../views/SearchPage.vue";
-
-// import {
-//   getLocalStorage,
-//   LOCALSTORAGE_KEYS,
-// } from "../utils/localStorage/LocalStorage";
+// import PickRecommendData from "../views/PickRecommendData.vue";
 
 Vue.use(VueRouter);
 
@@ -45,16 +41,6 @@ const routes = [
     name: "search",
     component: SearchPage,
   },
-
-  // {
-  //   path: "/login",
-  //   name: "login",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/authPage/LoginPage.vue"),
-  // },
 ];
 
 const router = new VueRouter({
@@ -62,17 +48,5 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
-
-// router.beforeEach((to, from, next) => {
-//   next();
-
-//   const storageJWT = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
-//   if (storageJWT) {
-//     next("/");
-//   } else {
-//     next("/login");
-//   }
-//   next();
-// });
 
 export default router;

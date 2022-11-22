@@ -14,7 +14,7 @@
 import SliderComponent from "../components/SliderComponent.vue";
 import CoverMovie from "../components/CoverMovie.vue";
 import MoviesComponent from "../components/MoviesComponent.vue";
-import { fetchMovies } from "../api/authAPI";
+import { fetchLikeMovies, fetchMovies } from "../api/authAPI";
 
 export default {
   name: "MainPage",
@@ -22,14 +22,30 @@ export default {
   data() {
     return {
       movies: [],
+      likedMovies: [],
+      userMovies: [],
     };
   },
   created() {
     fetchMovies(this.setData);
+    fetchLikeMovies();
+    this.compareMovies();
   },
   methods: {
     setData(data) {
       this.movies = data;
+    },
+    setLikedMoviesData(data) {
+      this.likedMovies = data;
+    },
+    compareMovies() {
+      this.movis.map((movie) => {
+        if (this.likedMovies.includes(movie)) {
+          const newMovie = { ...movie, isUserLiked: true };
+          this.userMovies.push(newMovie);
+        }
+      });
+      console.log(this.userMovies);
     },
   },
 };

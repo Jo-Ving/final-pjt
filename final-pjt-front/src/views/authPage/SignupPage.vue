@@ -31,11 +31,13 @@
       have an account?
       <button @click="toLoginPage">Log in here</button>
     </p>
+    <PickRecommendData :selectingData="selectingData" />
   </div>
 </template>
 
 <script>
 import InputComponent from "../../components/InputComponent.vue";
+
 import { checkEmailValidate, checkPasswordEqal } from "../../utils/validators";
 import {
   EMAIL_VALIDATION_FALSE,
@@ -43,10 +45,6 @@ import {
 } from "../../assets/constants";
 import { toNextRouter } from "../../router/routingLogic";
 import { fetchSignup } from "../../api/authAPI";
-
-// import axios from "axios";
-
-// const SIGNUP_URL = `http://127.0.0.1:8000/accounts/signup/`;
 
 export default {
   name: "LoginPage",
@@ -88,7 +86,6 @@ export default {
         password: this.password,
         passwordConfirm: this.passwordConfirm,
       });
-      // this.sendUserInfo();
       this.resetInput();
     },
     resetInput() {
@@ -99,23 +96,6 @@ export default {
     toLoginPage() {
       toNextRouter(this.$router, "login");
     },
-    // sendUserInfo() {
-    //   axios({
-    //     method: "post",
-    //     url: SIGNUP_URL,
-    //     data: {
-    //       username: this.email,
-    //       password: this.password,
-    //       password_confirm: this.passwordConfirm,
-    //     },
-    //   })
-    //     .then((res) => {
-    //       console.log(res);
-    //     })
-    //     .catch((e) => {
-    //       console.log(e);
-    //     });
-    // },
   },
 };
 </script>

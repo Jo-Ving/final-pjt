@@ -11,7 +11,6 @@ import { apiEndpoint, backendBaseUrl, movieUrl } from "./endpoints";
 
 const checkAuth = () => {
   const jwt = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
-  console.log(jwt);
   if (jwt) {
     return `Bearer ${jwt}`;
   }
@@ -49,9 +48,12 @@ export const fetchLogin = async ({ username, password }) => {
       username,
       password,
     });
-    console.log(data);
+    console.log(data, "🎈");
     const token = data.access;
     authResponseLogic(token);
+    // router.push({ path: "/" });
+    // location.reload();
+
     return data;
   } catch (err) {
     console.log(err);
@@ -68,6 +70,8 @@ export const fetchSignup = async ({ username, password, passwordConfirm }) => {
     console.log(data, "🎉");
     const token = data.token.access;
     authResponseLogic(token);
+    // router.push({ path: "/pickRecommendData" });
+    // location.reload();
   } catch (err) {
     console.log(err, "🎇");
   }
@@ -82,6 +86,19 @@ export const createReview = async ({ content, reviewScore, movieId }) => {
       review_score: reviewScore,
     });
     console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const fetchReview = async ({ movieId }, setData) => {
+  const url = movieUrl(apiEndpoint.movieReviewCreate, movieId);
+  console.log(url);
+  try {
+    const data = await instance.get(url);
+    console.log(data);
+    setData(data);
     return data;
   } catch (err) {
     console.log(err);
@@ -119,7 +136,7 @@ export const fetchLikeState = async (movieId) => {
   const url = movieUrl(apiEndpoint.movieLikeState, movieId);
   try {
     const data = await instance.post(url);
-    console.log(data);
+    console.log(data, "🎈");
   } catch (err) {
     console.log(err);
   }
@@ -128,8 +145,16 @@ export const fetchLikeState = async (movieId) => {
 export const fetchLikeMovies = async (setData) => {
   try {
     const data = await instance.get(apiEndpoint.likedMovies);
-    console.log(data, "hello");
     setData(data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const pickRecommendMovies = async () => {
+  try {
+    const data = await instance.post();
+    console.log(data);
   } catch (err) {
     console.log(err);
   }

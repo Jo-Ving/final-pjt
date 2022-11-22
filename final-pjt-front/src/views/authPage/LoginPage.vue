@@ -64,7 +64,6 @@ export default {
         username: this.email,
         password: this.password,
       });
-      // this.getUserInfo();
       this.resetInput();
     },
     resetInput() {

@@ -2,12 +2,13 @@
   <div>
     myFavorite
     <ul>
-      <li v-for="movie in movies" :key="movie">{{ movie }}</li>
+      <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
     </ul>
   </div>
 </template>
 
 <script>
+import MovieCard from "../components/MovieCard.vue";
 import { fetchLikeMovies } from "../api/authAPI";
 import { toNextRouter } from "../router/routingLogic";
 import {
@@ -21,6 +22,9 @@ export default {
       movies: [],
     };
   },
+  components: {
+    MovieCard,
+  },
   created() {
     fetchLikeMovies(this.setData);
     const jwt = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
@@ -28,8 +32,7 @@ export default {
   },
   methods: {
     setData(data) {
-      this.movies = data.like_movies;
-      console.log(data);
+      this.movies = data;
     },
   },
 };

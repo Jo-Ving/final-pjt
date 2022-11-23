@@ -79,9 +79,11 @@ def picks(request, movie_pk):
     movie = Movie.objects.get(pk=movie_pk)
     if movie.pick_users.filter(pk=request.user.pk).exists():
         movie.pick_users.remove(request.user)
+        is_picked = False
     else:
-        movie.pick_users.add(request.user)            
-    return Response(status=status.HTTP_200_OK)
+        movie.pick_users.add(request.user)    
+        is_picked = True
+    return Response(is_picked)
 
 ## 핫, 신작
 @api_view(['POST'])
@@ -149,7 +151,7 @@ def recommend2(request):
 
 @api_view(['GET', 'POST'])
 def comment_list(request, review_pk):
-    review = get_object_or_404(Movie, pk=review_pk)
+    review = get_object_or_404(Review, pk=review_pk)
     if request.method == 'GET':
         comments = review.movie_reviews.all()
         serializer = CommentListSerializer(comments, many=True)

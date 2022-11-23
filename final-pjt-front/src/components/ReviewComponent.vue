@@ -1,10 +1,8 @@
 <template>
   <li>
     <div>
-      <img src="" alt="" />
-    </div>
-    <div>
       <p>⭐⭐⭐⭐⭐</p>
+      <h2>hello</h2>
       <div>
         <p>{{ review.user.username }}</p>
         <p>{{ createdAt() }}</p>
@@ -22,6 +20,7 @@ export default {
   props: {
     review: {},
   },
+  components: {},
   methods: {
     createdAt() {
       const createdDate = this.review.created_at.split("T");

@@ -66,12 +66,8 @@ li {
   border: 1px solid white;
 }
 .container {
-  width: 100vw;
-  margin: 0;
 }
 .movieContainer {
-  margin: 0;
-  width: 100vw;
 }
 .slider {
   display: flex;

@@ -43,12 +43,13 @@
       have an account?
       <span class="changepage-link" @click="toLoginPage">Log in here</span>
     </p>
-    <!-- <PickRecommendData :selectingData="selectingData" /> -->
+    <!-- <PickMoviesComponent /> -->
   </div>
 </template>
 
 <script>
 import InputComponent from "../../components/InputComponent.vue";
+// import PickMoviesComponent from "../../components/PickMoviesComponent.vue";
 
 import { checkEmailValidate, checkPasswordEqal } from "../../utils/validators";
 import {
@@ -72,6 +73,7 @@ export default {
   },
   components: {
     InputComponent,
+    // PickMoviesComponent,
   },
   methods: {
     getEmailValue(email) {

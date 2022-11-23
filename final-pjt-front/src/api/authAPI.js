@@ -39,8 +39,8 @@ instance.interceptors.response.use(
 
 const authResponseLogic = (token) => {
   token ? setLocalStorage(LOCALSTORAGE_KEYS.userJWT, token) : "";
-  router.push({ path: "/" });
-  location.reload();
+  // router.push({ path: "/" });
+  // location.reload();
 };
 
 export const fetchLogin = async ({ username, password }) => {
@@ -52,8 +52,8 @@ export const fetchLogin = async ({ username, password }) => {
     console.log(data, "🎈");
     const token = data.access;
     authResponseLogic(token);
-    // router.push({ path: "/" });
-    // location.reload();
+    router.push({ path: "/" });
+    location.reload();
 
     return data;
   } catch (err) {
@@ -71,8 +71,8 @@ export const fetchSignup = async ({ username, password, passwordConfirm }) => {
     console.log(data, "🎉");
     const token = data.token.access;
     authResponseLogic(token);
-    // router.push({ path: "/pickRecommendData" });
-    // location.reload();
+    router.push({ path: "/pick" });
+    location.reload();
   } catch (err) {
     console.log(err, "🎇");
   }
@@ -152,9 +152,11 @@ export const fetchLikeMovies = async (setData) => {
   }
 };
 
-export const pickRecommendMovies = async () => {
+export const pickMovie = async (movieId) => {
+  const url = movieUrl(apiEndpoint.moviePickMoie, movieId);
+  console.log(url);
   try {
-    const data = await instance.post();
+    const data = await instance.post(url);
     console.log(data);
   } catch (err) {
     console.log(err);

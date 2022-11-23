@@ -3,10 +3,12 @@
     <!-- header1  -->
     <CoverMovie />
     <!-- movies you must watch  -->
-    <SliderComponent />
-    <SliderComponent />
-    <SliderComponent />
-    <MoviesComponent :movies="movies" />
+    <div class="movieContainer">
+      <SliderComponent />
+      <SliderComponent />
+      <SliderComponent />
+      <MoviesComponent :movies="movies" />
+    </div>
   </div>
 </template>
 
@@ -62,6 +64,14 @@ li {
   width: 183px;
   height: 275px;
   border: 1px solid white;
+}
+.container {
+  width: 100vw;
+  margin: 0;
+}
+.movieContainer {
+  margin: 0;
+  width: 100vw;
 }
 .slider {
   display: flex;

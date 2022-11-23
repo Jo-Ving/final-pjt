@@ -1,47 +1,51 @@
 <template>
-  <div class="login-box">
-    <h1>Signup</h1>
-    <form action="submit" @click.prevent>
-      <div class="user-box">
-        <InputComponent
-          :userInput="email"
-          :labelName="`email*`"
-          @inputFromChild="getEmailValue"
-        />
-        <div class="message-box">
-          <p class="validate-message">{{ emailValidateMessage }}</p>
+  <div>
+    <div class="login-box">
+      <h1>Signup</h1>
+      <form action="submit" @click.prevent>
+        <div class="user-box">
+          <InputComponent
+            :userInput="email"
+            :labelName="`email*`"
+            @inputFromChild="getEmailValue"
+          />
+          <div class="message-box">
+            <p class="validate-message">{{ emailValidateMessage }}</p>
+          </div>
         </div>
-      </div>
-      <div class="user-box">
-        <InputComponent
-          :userInput="password"
-          :labelName="`password*`"
-          @inputFromChild="getPasswordValue"
-        />
-      </div>
-      <div class="user-box">
-        <InputComponent
-          :userInput="passwordConfirm"
-          :labelName="`password*`"
-          @inputFromChild="getPasswordConfirmValue"
-        />
-        <div class="message-box">
-          <p class="validate-message">{{ passwordEqualMessage }}</p>
+        <div class="user-box">
+          <InputComponent
+            :userInput="password"
+            :labelName="`password*`"
+            @inputFromChild="getPasswordValue"
+          />
         </div>
-      </div>
-      <button @click="onSignUpButtonClick">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        Sign up
-      </button>
-    </form>
-    <p>
-      have an account?
-      <span class="changepage-link" @click="toLoginPage">Log in here</span>
-    </p>
+        <div class="user-box">
+          <InputComponent
+            :userInput="passwordConfirm"
+            :labelName="`password*`"
+            @inputFromChild="getPasswordConfirmValue"
+          />
+          <div class="message-box">
+            <p class="validate-message">{{ passwordEqualMessage }}</p>
+          </div>
+        </div>
+        <button @click="onSignUpButtonClick">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Sign up
+        </button>
+      </form>
+      <p>
+        have an account?
+        <span class="changepage-link" @click="toLoginPage">Log in here</span>
+      </p>
+    </div>
+    <!-- <div class="pickmovie"> -->
     <!-- <PickMoviesComponent /> -->
+    <!-- </div> -->
   </div>
 </template>
 
@@ -314,5 +318,11 @@ button {
   border: none;
   outline: none;
   background: transparent;
+}
+.pickmovie {
+  margin-top: 90vh;
+
+  /* position: absolute; */
+  width: 100vw;
 }
 </style>

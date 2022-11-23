@@ -1,18 +1,22 @@
 <template>
-  <div>
+  <div class="pickmovies">
     <ul>
-      <MovieCard v-for="(movie, index) in movies" :key="index" :movie="movie" />
+      <PickMovieCard
+        v-for="(movie, index) in movies"
+        :key="index"
+        :movie="movie"
+      />
     </ul>
   </div>
 </template>
 
 <script>
 import { fetchMovies } from "../api/authAPI";
-import MovieCard from "./MovieCard.vue";
+import PickMovieCard from "./PickMovieCard.vue";
 
 export default {
   name: "MoviesComponent",
-  components: { MovieCard },
+  components: { PickMovieCard },
   data() {
     return {
       movies: [],
@@ -29,4 +33,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.pickmovies {
+  background-color: var(--gray8);
+}
+</style>

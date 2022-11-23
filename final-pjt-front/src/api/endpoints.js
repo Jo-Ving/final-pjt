@@ -12,7 +12,7 @@ export const apiEndpoint = {
   movieReviewCreate: `/movies/ID/reviews/`,
   movieLikeState: `/movies/ID/likes/`,
 
-  // moviePickMoies: `/movies/ID/likes/`,
+  moviePickMoie: `/movies/ID/picks/`,
 };
 
 export const movieUrl = (baseUrl, movieId) => {

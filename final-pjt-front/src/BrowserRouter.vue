@@ -1,7 +1,9 @@
 <template>
   <div>
     <NavBar />
-    <router-view />
+    <div class="mainView">
+      <router-view />
+    </div>
     <FooterComponent />
   </div>
 </template>
@@ -15,4 +17,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.mainView {
+  min-height: 90vh;
+}
+</style>

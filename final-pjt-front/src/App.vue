@@ -23,6 +23,7 @@ export default {
 body {
   margin: 0;
   color: var(--gray0);
+  /* background: linear-gradient(#141e30, #243b55); */
 }
 
 #app {
@@ -32,6 +33,7 @@ body {
   text-align: center;
   background-color: var(--gray8);
   min-height: 100vh;
+  height: auto;
 }
 
 nav a {

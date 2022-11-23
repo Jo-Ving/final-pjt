@@ -1,10 +1,13 @@
 <template>
   <li>
     <div>
-      <img src="" alt="" />
-    </div>
-    <div>
-      <p>⭐⭐⭐⭐⭐</p>
+      <div class="applebox">
+        <div v-for="index in 5" :key="index">
+          <span v-if="index <= review.review_score">🍎</span>
+          <span v-if="index > review.review_score">🍏</span>
+        </div>
+      </div>
+      <h2>hello</h2>
       <div>
         <p>{{ review.user.username }}</p>
         <p>{{ createdAt() }}</p>
@@ -22,6 +25,7 @@ export default {
   props: {
     review: {},
   },
+  components: {},
   methods: {
     createdAt() {
       const createdDate = this.review.created_at.split("T");
@@ -32,4 +36,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.applebox {
+  display: flex;
+  flex-direction: row;
+}
+</style>

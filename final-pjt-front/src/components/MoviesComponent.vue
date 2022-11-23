@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <ul>
-      <MovieCard v-for="(movie, index) in movies" :key="index" :movie="movie" />
-    </ul>
+  <div class="container">
+    <MovieCard v-for="(movie, index) in movies" :key="index" :movie="movie" />
   </div>
 </template>
 
@@ -18,4 +16,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.container {
+  background-color: var(--gray8);
+  width: 100vw;
+}
+</style>

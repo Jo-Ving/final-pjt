@@ -6,7 +6,7 @@ import MyFavorite from "../views/MyFavorite.vue";
 import LoginPage from "../views/authPage/LoginPage.vue";
 import SignupPage from "../views/authPage/SignupPage.vue";
 import SearchPage from "../views/SearchPage.vue";
-// import PickRecommendData from "../views/PickRecommendData.vue";
+import PickRecommendData from "../views/PickRecommendData.vue";
 
 Vue.use(VueRouter);
 
@@ -40,6 +40,11 @@ const routes = [
     path: "/search",
     name: "search",
     component: SearchPage,
+  },
+  {
+    path: "/pick",
+    name: "pick",
+    component: PickRecommendData,
   },
 ];
 

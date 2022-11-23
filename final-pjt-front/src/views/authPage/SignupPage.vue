@@ -1,54 +1,57 @@
 <template>
-  <div class="login-box">
-    <h1>Signup</h1>
-    <form action="submit" @click.prevent>
-      <div class="user-box">
-        <InputComponent
-          :userInput="email"
-          :labelName="`email*`"
-          @inputFromChild="getEmailValue"
-        />
-        <div class="message-box">
-          <p class="validate-message">{{ emailValidateMessage }}</p>
+  <div>
+    <div class="login-box">
+      <h1>Signup</h1>
+      <form action="submit" @click.prevent>
+        <div class="user-box">
+          <InputComponent
+            :userInput="email"
+            :labelName="`email*`"
+            @inputFromChild="getEmailValue"
+          />
+          <div class="message-box">
+            <p class="validate-message">{{ emailValidateMessage }}</p>
+          </div>
         </div>
-      </div>
-      <div class="user-box">
-        <InputComponent
-          :userInput="password"
-          :labelName="`password*`"
-          @inputFromChild="getPasswordValue"
-        />
-      </div>
-      <div class="user-box">
-        <InputComponent
-          :userInput="passwordConfirm"
-          :labelName="`password*`"
-          @inputFromChild="getPasswordConfirmValue"
-        />
-        <div class="message-box">
-          <p class="validate-message">{{ passwordEqualMessage }}</p>
+        <div class="user-box">
+          <InputComponent
+            :userInput="password"
+            :labelName="`password*`"
+            @inputFromChild="getPasswordValue"
+          />
         </div>
-      </div>
-      <button>
-        <a @click="onSignUpButtonClick">
+        <div class="user-box">
+          <InputComponent
+            :userInput="passwordConfirm"
+            :labelName="`password*`"
+            @inputFromChild="getPasswordConfirmValue"
+          />
+          <div class="message-box">
+            <p class="validate-message">{{ passwordEqualMessage }}</p>
+          </div>
+        </div>
+        <button @click="onSignUpButtonClick">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           Sign up
-        </a>
-      </button>
-    </form>
-    <p>
-      have an account?
-      <span class="changepage-link" @click="toLoginPage">Log in here</span>
-    </p>
-    <!-- <PickRecommendData :selectingData="selectingData" /> -->
+        </button>
+      </form>
+      <p>
+        have an account?
+        <span class="changepage-link" @click="toLoginPage">Log in here</span>
+      </p>
+    </div>
+    <!-- <div class="pickmovie"> -->
+    <!-- <PickMoviesComponent /> -->
+    <!-- </div> -->
   </div>
 </template>
 
 <script>
 import InputComponent from "../../components/InputComponent.vue";
+// import PickMoviesComponent from "../../components/PickMoviesComponent.vue";
 
 import { checkEmailValidate, checkPasswordEqal } from "../../utils/validators";
 import {
@@ -72,6 +75,7 @@ export default {
   },
   components: {
     InputComponent,
+    // PickMoviesComponent,
   },
   methods: {
     getEmailValue(email) {
@@ -114,6 +118,16 @@ export default {
 </script>
 
 <style scoped>
+@import "../../assets/style.css";
+
+.changepage-link {
+  cursor: pointer;
+  color: var(--gray6);
+}
+.changepage-link:hover {
+  color: #7ee5eb;
+}
+
 html {
   height: 100%;
 }
@@ -153,7 +167,7 @@ body {
   padding: 10px 0;
   font-size: 16px;
   color: #fff;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   border: none;
   border-bottom: 1px solid #fff;
   outline: none;
@@ -178,7 +192,7 @@ body {
   font-size: 12px;
 }
 
-.login-box form a {
+.login-box form button {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
@@ -192,7 +206,7 @@ body {
   letter-spacing: 4px;
 }
 
-.login-box a:hover {
+.login-box button:hover {
   background: #7ee5eb;
   color: #fff;
   border-radius: 5px;
@@ -200,12 +214,12 @@ body {
     0 0 100px #7ee5eb;
 }
 
-.login-box a span {
+.login-box button span {
   position: absolute;
   display: block;
 }
 
-.login-box a span:nth-child(1) {
+.login-box button span:nth-child(1) {
   top: 0;
   left: -100%;
   width: 100%;
@@ -224,7 +238,7 @@ body {
   }
 }
 
-.login-box a span:nth-child(2) {
+.login-box button span:nth-child(2) {
   top: -100%;
   right: 0;
   width: 2px;
@@ -244,7 +258,7 @@ body {
   }
 }
 
-.login-box a span:nth-child(3) {
+.login-box button span:nth-child(3) {
   bottom: 0;
   right: -100%;
   width: 100%;
@@ -264,7 +278,7 @@ body {
   }
 }
 
-.login-box a span:nth-child(4) {
+.login-box button span:nth-child(4) {
   bottom: -100%;
   left: 0;
   width: 2px;
@@ -300,11 +314,15 @@ body {
   margin: 0;
   color: red;
 }
-.notActivate {
-}
 button {
-  outline: none;
   border: none;
+  outline: none;
   background: transparent;
+}
+.pickmovie {
+  margin-top: 90vh;
+
+  /* position: absolute; */
+  width: 100vw;
 }
 </style>

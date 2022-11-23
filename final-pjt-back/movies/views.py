@@ -21,10 +21,23 @@ def movie_list(request):
 
 @api_view(['GET'])
 def movie_detail(request, movie_pk):
-    movie = get_object_or_404(Movie, pk=movie_pk)
     if request.method == 'GET':
-        serializer = MovieSerializer(movie)
-        return Response(serializer.data)
+        movie = get_object_or_404(Movie, pk=movie_pk)
+        serializer1 = MovieSerializer(movie)
+        genre1_id = movie.genres.all()[:1][0].id
+        genre2_id = movie.genres.all()[1:2][0].id
+        genre1 = Genre.objects.get(pk=genre1_id)
+        genre2 = Genre.objects.get(pk=genre2_id)
+        simliar_movies1 = genre1.genre_movies.all()
+        simliar_movies2 = genre2.genre_movies.all()
+        simliar_movies = simliar_movies1.union(simliar_movies2)
+        simliar_movies = simliar_movies.all().order_by('-vote_count', '-vote_average')[:20]
+        serializer2 = MovieSerializer(simliar_movies, many=True)
+        data = {
+            'movie' : serializer1.data,
+            'simliar_movies' : serializer2.data
+        }    
+        return Response(data)
 
 
 @api_view(['GET', 'POST'])

@@ -41,7 +41,7 @@ export default {
       this.likedMovies = data;
     },
     compareMovies() {
-      this.movis?.map((movie) => {
+      this.movies?.map((movie) => {
         if (this.likedMovies.includes(movie)) {
           const newMovie = { ...movie, isUserLiked: true };
           this.userMovies.push(newMovie);

@@ -10,8 +10,6 @@ class MovieSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
         
-
-
 class ReviewListSerializer(serializers.ModelSerializer):
 
     class UserSerializer(serializers.ModelSerializer):

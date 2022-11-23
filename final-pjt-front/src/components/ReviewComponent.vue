@@ -6,7 +6,7 @@
     <div>
       <p>⭐⭐⭐⭐⭐</p>
       <div>
-        <p>{{ review.user }}</p>
+        <p>{{ review.user.username }}</p>
         <p>{{ createdAt() }}</p>
       </div>
       <p>

@@ -33,7 +33,7 @@ instance.interceptors.response.use(
   },
   (error) => {
     console.log(error, 16);
-    alert("에러가 발생했습니다, 다시 시도해 주세요");
+    // alert("에러가 발생했습니다, 다시 시도해 주세요");
   }
 );
 

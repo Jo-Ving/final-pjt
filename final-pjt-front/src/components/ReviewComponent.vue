@@ -1,7 +1,12 @@
 <template>
   <li>
     <div>
-      <p>⭐⭐⭐⭐⭐</p>
+      <div class="applebox">
+        <div v-for="index in 5" :key="index">
+          <span v-if="index <= review.review_score">🍎</span>
+          <span v-if="index > review.review_score">🍏</span>
+        </div>
+      </div>
       <h2>hello</h2>
       <div>
         <p>{{ review.user.username }}</p>
@@ -31,4 +36,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.applebox {
+  display: flex;
+  flex-direction: row;
+}
+</style>

@@ -12,7 +12,7 @@
             <h4>{{ movie.title }}</h4>
           </div>
           <div class="vstack gap-1">
-            <div class="hstack gap-3">
+            <!-- <div class="hstack gap-3">
               <p>감독</p>
               <p>돼지</p>
             </div>
@@ -23,7 +23,7 @@
             <div class="hstack gap-3">
               <p>감독</p>
               <p>돼지</p>
-            </div>
+            </div> -->
           </div>
           <p style="text-align: left">
             {{ movie.overview }}
@@ -32,9 +32,13 @@
       </div>
       <div class="detail-right">
         <form action="submit" @click.prevent>
-          <StarPoint />
+          <StarPoint @starCheck="starPoint" />
           <InputComponent :userInput="content" @inputFromChild="getReview" />
           <button @click="onReviewSubmit">리뷰 등록하기</button>
+          <ButtonComponent
+            @onButtonClick="onReviewSubmit"
+            :buttonName="`리뷰 등록`"
+          />
         </form>
         <div class="reviews">
           <h4>리뷰 목록</h4>
@@ -57,6 +61,8 @@ import ReviewComponent from "../components/ReviewComponent.vue";
 import SliderComponent from "../components/SliderComponent.vue";
 import InputComponent from "../components/InputComponent.vue";
 import StarPoint from "../components/StarPoint.vue";
+import ButtonComponent from "../components/ButtonComponent.vue";
+// import BUTTON_NAMES from "../assets/constants";
 
 import { fetchMovieDetail, createReview, fetchReview } from "../api/authAPI";
 
@@ -67,14 +73,16 @@ export default {
     SliderComponent,
     InputComponent,
     StarPoint,
+    ButtonComponent,
   },
   data() {
     return {
       movie: {},
       movieId: 0,
       reviews: [],
-      reviewScore: 3,
+      reviewScore: 0,
       content: "",
+      // submitReviewButton: BUTTON_NAMES?.submitReview,
     };
   },
   created() {
@@ -109,6 +117,9 @@ export default {
     },
     resetInput() {
       this.content = "";
+    },
+    starPoint(point) {
+      this.reviewScore = point - 1;
     },
   },
 };

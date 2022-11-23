@@ -1,7 +1,12 @@
 <template>
   <div class="inner">
     <div class="star-rating">
-      <div class="star" v-for="index in 5" :key="index" @click="check(index)">
+      <div
+        class="star"
+        v-for="index in 5"
+        :key="index"
+        @click="starCheck(index)"
+      >
         <span v-if="index < score">🍎</span>
         <span v-if="index >= score">🍏</span>
       </div>
@@ -18,8 +23,9 @@ export default {
     };
   },
   methods: {
-    check(index) {
+    starCheck(index) {
       this.score = index + 1;
+      this.$emit("starCheck", this.score);
     },
   },
 };
@@ -30,12 +36,10 @@ export default {
   display: flex;
 }
 
-/* .star {
-  position: relative;
-  font-size: 2rem;
-  color: #ddd;
+.star {
+  cursor: pointer;
 }
-
+/*
 .star input {
   width: 100%;
   height: 100%;

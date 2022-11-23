@@ -49,11 +49,11 @@ export const fetchLogin = async ({ username, password }) => {
       username,
       password,
     });
-    console.log(data, "🎈");
     const token = data.access;
     authResponseLogic(token);
     router.push({ path: "/" });
     location.reload();
+    console.log(data);
 
     return data;
   } catch (err) {
@@ -162,3 +162,5 @@ export const pickMovie = async (movieId) => {
     console.log(err);
   }
 };
+
+export const getUserId = async () => {};

@@ -34,7 +34,7 @@
         <form action="submit" @click.prevent>
           <StarPoint @starCheck="starPoint" />
           <InputComponent :userInput="content" @inputFromChild="getReview" />
-          <button @click="onReviewSubmit">리뷰 등록하기</button>
+          <!-- <button @click="onReviewSubmit">리뷰 등록하기</button> -->
           <ButtonComponent
             @onButtonClick="onReviewSubmit"
             :buttonName="`리뷰 등록`"

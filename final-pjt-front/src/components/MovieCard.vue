@@ -23,7 +23,10 @@
           </div>
         </div>
       </div>
-      <button @click="onlikeButtonClick">❤</button>
+      <button @click="onlikeButtonClick">
+        <!-- {{ onLikeState() }} -->
+        🤍
+      </button>
     </div>
   </div>
 </template>
@@ -33,6 +36,11 @@ import { fetchLikeState } from "../api/authAPI";
 // import { toNextRouter } from "../router/routingLogic";
 export default {
   name: "MovieCard",
+  data() {
+    return {
+      likeButtonState: "🤍",
+    };
+  },
   props: {
     movie: Object,
   },
@@ -45,6 +53,10 @@ export default {
         name: "detail",
         params: { id: this.movie.id },
       });
+    },
+    onLikeState() {
+      // console.log(this.movie);
+      // return this.movie.like_users.includes(userId) ? '💛' : '🤍'
     },
   },
 };
@@ -63,6 +75,11 @@ img {
 p {
   margin: 0;
   font-size: 10px;
+}
+button {
+  outline: none;
+  border: none;
+  background: transparent;
 }
 .cardContainer {
   display: inline-block;

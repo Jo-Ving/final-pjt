@@ -26,7 +26,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
         model = Review
         fields = '__all__'
         # fields = ('content','review_score',)
-        read_only_fields = ('movie', 'user','username',)
+        read_only_fields = ('movie', 'user','username','review_like_users')
 
 
 
@@ -37,7 +37,7 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = '__all__'
         # fields = ('content','review_score',)
-        read_only_fields = ('movie', 'user')
+        read_only_fields = ('movie', 'user', 'review_like_users')
 
 
 

@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .serializers import MovieSerializer, ReviewSerializer
+from .serializers import MovieSerializer, ReviewSerializer, ReviewListSerializer
 from .models import Movie, Review
 
 from django.contrib.auth.decorators import login_required
@@ -32,9 +32,9 @@ def review_list(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     if request.method == 'GET':
         reviews = movie.movie_reviews.all()
+        serializer = ReviewListSerializer(reviews, many=True)
         print(reviews)
         # reviews = get_list_or_404(Review)
-        serializer = ReviewSerializer(reviews, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
@@ -49,7 +49,6 @@ def review_list(request, movie_pk):
 @api_view(['GET', 'DELETE', 'PUT'])
 def review_detail(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
-
     if request.method == 'GET':
         serializer = ReviewSerializer(review)
         return Response(serializer.data)
@@ -92,8 +91,9 @@ def review_likes(request, review_pk):
         review_is_liked = True
     return Response(review_is_liked)
 
+@api_view(['POST'])
 def recommend1(request):
-    recent_movies = Movie.objects.all().order_by('-release_date', '-vote_average')[:20] 
+    recent_movies = Movie.objects.all().order_by('-release_date', '-vote_average')[:10] 
     hot_movies =  Movie.objects.all().order_by('-vote_count', '-vote_average')[:20]
     serializer1 = MovieSerializer(recent_movies, many=True)
     serializer2 = MovieSerializer(hot_movies, many=True)

@@ -15,12 +15,12 @@ class Movie(models.Model):
     vote_average = models.FloatField()
     backdrop_path = models.CharField(max_length=200, null=True)
     overview = models.TextField()
-    genres = models.ManyToManyField(Genre)
+    genres = models.ManyToManyField(Genre ,related_name='genre_movies')
 
 class Review(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='movie_reviews')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    # review_like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews')
+    review_like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews')
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     review_score = models.FloatField()

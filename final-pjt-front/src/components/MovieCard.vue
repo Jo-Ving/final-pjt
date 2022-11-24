@@ -36,7 +36,6 @@ import {
   getLocalStorage,
   LOCALSTORAGE_KEYS,
 } from "../utils/localStorage/LocalStorage";
-// import { toNextRouter } from "../router/routingLogic";
 
 export default {
   name: "MovieCard",
@@ -59,7 +58,7 @@ export default {
         params: { id: this.movie.id },
       });
     },
-    onLikeState() {
+    likeState() {
       this.likeButtonState = this.movie.like_users.includes(this.getUserId())
         ? true
         : false;
@@ -69,7 +68,7 @@ export default {
     },
   },
   created() {
-    this.onLikeState();
+    this.likeState();
     console.log(this.likeButtonState);
   },
 };

@@ -30,8 +30,9 @@ export default {
   },
   methods: {
     onMoviePick() {
-      pickMovie(this.movie.id);
       this.isPicked = !this.isPicked;
+      this.$emit("pickmovie", this.isPicked);
+      pickMovie(this.movie.id);
     },
   },
 };

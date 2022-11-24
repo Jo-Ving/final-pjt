@@ -2,9 +2,10 @@
   <div class="pickmovies">
     <ul>
       <PickMovieCard
-        v-for="(movie, index) in movies"
-        :key="index"
+        v-for="movie in movies"
+        :key="movie.id"
         :movie="movie"
+        @pickmovie="pickMovieCount"
       />
     </ul>
   </div>
@@ -20,6 +21,7 @@ export default {
   data() {
     return {
       movies: [],
+      pickedMovieCount: 0,
     };
   },
   created() {
@@ -28,6 +30,10 @@ export default {
   methods: {
     setData(data) {
       this.movies = data;
+    },
+    pickMovieCount(isPicked) {
+      isPicked ? (this.pickedMovieCount += 1) : (this.pickedMovieCount -= 1);
+      this.$emit("pickMovieCount", this.pickedMovieCount);
     },
   },
 };

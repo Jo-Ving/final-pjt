@@ -1,19 +1,22 @@
 <template>
-  <div>
-    <div>
-      <div style="padding: 1rem; margin: 1rem" class="container">
+  <div class="outsideContainer">
+    <div class="cont">
+      <div class="container">
         <div class="detail-left">
-          <div class="d-flex flex-column">
-            <div>
-              <img
-                class=""
-                :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
-                alt=""
-              />
-              <h4>{{ movie.title }}</h4>
-            </div>
-            <div class="vstack gap-1">
-              <!-- <div class="hstack gap-3">
+          <div>
+            <h4>{{ movie.title }}</h4>
+
+            <img
+              class=""
+              :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
+              alt=""
+            />
+            <!-- <h5>{{ movie.genres }}</h5> -->
+            <li v-for="genre in genreName" :key="genre">{{ genre }}</li>
+            <p>{{ movie.popularity }}</p>
+          </div>
+          <div class="vstack gap-1">
+            <!-- <div class="hstack gap-3">
               <p>감독</p>
               <p>돼지</p>
             </div>
@@ -25,25 +28,35 @@
               <p>감독</p>
               <p>돼지</p>
             </div> -->
-            </div>
-            <p style="text-align: left">
-              {{ movie.overview }}
-            </p>
           </div>
+          <p style="text-align: left">
+            {{ movie.overview }}
+          </p>
         </div>
         <div class="detail-right">
-          <form action="submit" @click.prevent>
-            <StarPoint @starCheck="starPoint" />
-            <InputComponent :userInput="content" @inputFromChild="getReview" />
-            <!-- <button @click="onReviewSubmit">리뷰 등록하기</button> -->
-            <ButtonComponent
-              :disabled="loginState === false"
-              @onButtonClick="onReviewSubmit"
-              :buttonName="`리뷰 등록`"
-            />
-          </form>
+          <h4 class="reviewTitle">리뷰 보기</h4>
+
+          <div class="reviewContainer">
+            <form action="submit" @click.prevent>
+              <StarPoint @starCheck="starPoint" />
+              <div class="inputContainer">
+                <InputComponent
+                  class="input"
+                  :userInput="content"
+                  @inputFromChild="getReview"
+                />
+                <!-- <button @click="onReviewSubmit">리뷰 등록하기</button> -->
+                <ButtonComponent
+                  class="reviewSubmitButton"
+                  :disabled="loginState === false"
+                  @onButtonClick="onReviewSubmit"
+                  :buttonName="`리뷰 등록`"
+                />
+              </div>
+            </form>
+          </div>
+
           <div class="reviews">
-            <h4>리뷰 목록</h4>
             <ul>
               <ReviewComponent
                 v-for="review in reviews"
@@ -53,12 +66,13 @@
             </ul>
           </div>
         </div>
-        <div>
-          <SliderComponent />
-        </div>
       </div>
     </div>
-    <SliderComponent :movies="similarMovies" :sliderName="`Similar movies`" />
+    <SliderComponent
+      class="slider"
+      :movies="similarMovies"
+      :sliderName="`Similar movies`"
+    />
   </div>
 </template>
 
@@ -72,7 +86,7 @@ import ButtonComponent from "../components/ButtonComponent.vue";
 
 import { fetchMovieDetail, createReview, fetchReview } from "../api/authAPI";
 import { isLogin } from "../utils/localStorage/LocalStorage";
-
+import { genres } from "../assets/genres";
 export default {
   name: "DetailPage",
   components: {
@@ -91,6 +105,7 @@ export default {
       content: "",
       similarMovies: [],
       loginState: true,
+      genreName: [],
       // submitReviewButton: BUTTON_NAMES?.submitReview,
     };
   },
@@ -120,8 +135,10 @@ export default {
     },
     setData(movie) {
       console.log(movie);
+
       this.movie = movie.movie;
       this.similarMovies = movie.simliar_movies;
+      this.getGenres(this.movie);
     },
     setReviewData(reviews) {
       this.reviews = reviews;
@@ -132,11 +149,43 @@ export default {
     starPoint(point) {
       this.reviewScore = point - 1;
     },
+    getGenres(movie) {
+      console.log(genres);
+      genres.map((genre) => {
+        console.log(genre, movie.genres);
+        if (movie.genres.includes(genre.id)) {
+          this.genreName.push(genre.name);
+        }
+      });
+    },
   },
 };
 </script>
 
 <style scoped>
+.cont {
+  display: flex;
+  display: inline-block;
+  padding: 3rem;
+  box-shadow: 0 1px 1px rgba(238, 233, 233, 0.11),
+    0 2px 2px rgba(240, 233, 233, 0.11), 0 4px 4px rgba(240, 237, 237, 0.11),
+    0 8px 8px rgba(235, 233, 233, 0.11), 0 16px 16px rgba(216, 212, 212, 0.11),
+    0 32px 32px rgba(238, 235, 235, 0.11);
+}
+.outsideContainer {
+  width: 100vw;
+  height: 90vh;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  align-items: center;
+  overflow: auto;
+}
+h4 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
 * {
   margin: 0;
   padding: 0;
@@ -151,23 +200,54 @@ ul {
   padding: 0;
 }
 .container {
+  margin: 0px;
   display: flex;
+  justify-content: space-between;
   width: 100%;
-  height: 100vh;
-  border: 1px solid pink;
+  height: auto;
 }
 .detail-left {
-  width: 40%;
+  width: 35%;
 }
 .detail-right {
-  width: 60%;
+  width: 50%;
+  height: 80vh;
   margin-left: 3rem;
   text-align: left;
   overflow-y: scroll;
+  position: static;
+}
+.detail-right::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
-.container {
+.reviewContainer {
+  background-color: black;
+  z-index: 99;
+  position: sticky;
+  top: 0;
 }
-.reviews {
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid salmon; */
+}
+.reviewContainer form {
+  border: 1px solid paleturquoise;
+}
+.reviewContainer .input {
+  border: 1px solid white;
+  width: 100%;
+  height: 100%;
+}
+.reviewTitle {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+.reviewSubmitButton {
+  width: 90%;
+}
+.slider {
+  display: inline-block;
 }
 </style>

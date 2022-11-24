@@ -28,7 +28,13 @@ export default {
 </script>
 
 <style scoped>
-html {
+input {
+  color: white;
+  background-color: black;
+  border: none;
+  outline: none;
+}
+/* html {
   height: 100%;
 }
 body {
@@ -168,6 +174,7 @@ body {
   animation-delay: 0.5s;
 }
 
-input {
-}
+user-box {
+  width: 100%;
+} */
 </style>

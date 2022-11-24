@@ -1,6 +1,7 @@
 <template>
   <div class="inner">
     <div class="star-rating">
+      <span>사과포인트: </span>
       <div
         class="star"
         v-for="index in 5"

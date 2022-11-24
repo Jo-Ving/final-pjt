@@ -7,6 +7,7 @@
           <InputComponent
             :userInput="email"
             :labelName="`email*`"
+            :type="`text`"
             @inputFromChild="getEmailValue"
           />
           <div class="message-box">
@@ -17,6 +18,7 @@
           <InputComponent
             :userInput="password"
             :labelName="`password*`"
+            :type="`password`"
             @inputFromChild="getPasswordValue"
           />
         </div>
@@ -24,6 +26,7 @@
           <InputComponent
             :userInput="passwordConfirm"
             :labelName="`password confirm*`"
+            :type="`password`"
             @inputFromChild="getPasswordConfirmValue"
           />
           <div class="message-box">
@@ -66,6 +69,8 @@ export default {
       email: "",
       password: "",
       passwordConfirm: "",
+      mockPassword: "",
+      mockPasswordConfirm: "",
       emailValidateMessage: "",
       passwordEqualMessage: "",
       submitButtonState: false,
@@ -90,6 +95,8 @@ export default {
     },
     getPasswordValue(password) {
       this.password = password;
+      this.mockPassword = "*".repeat(password.length);
+      console.log(this.mockPassword);
       if (checkPasswordEqal(this.password, this.passwordConfirm)) {
         this.passwordEqualMessage = "";
         this.isPasswordValidate = true;

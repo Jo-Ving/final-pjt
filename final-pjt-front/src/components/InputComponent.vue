@@ -1,6 +1,6 @@
 <template>
   <div class="user-box">
-    <input :value="userInput" @input="titleUpdate" type="text" />
+    <input :value="userInput" @input="titleUpdate" :type="type" />
     <span class="highlight"></span>
     <span class="bar"></span>
     <label for="labelName">{{ labelName }}</label>
@@ -13,6 +13,7 @@ export default {
   props: {
     labelName: String,
     userInput: String,
+    type: String,
   },
   data() {
     return {};

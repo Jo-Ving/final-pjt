@@ -5,6 +5,7 @@
       <InputComponent
         :userInput="email"
         :labelName="`email*`"
+        :type="`text`"
         @inputFromChild="getEmailValue"
       />
       <div class="message-box">
@@ -13,6 +14,7 @@
       <InputComponent
         :userInput="password"
         :labelName="`password*`"
+        :type="`password`"
         @inputFromChild="getPasswordValue"
       />
       <ButtonComponent
@@ -52,9 +54,13 @@ export default {
   },
   methods: {
     getEmailValue(email) {
+      this.email = email;
+
       if (checkEmailValidate(email)) {
         this.isValidate = true;
         this.emailValidateMessage = "";
+        this.email = email;
+
         return;
       }
       this.emailValidateMessage = EMAIL_VALIDATION_FALSE;

@@ -57,6 +57,7 @@ export const fetchLogin = async ({ username, password }) => {
       username,
       password,
     });
+    console.log(data);
     const token = data.access;
     authResponseLogic(token);
     router.push({ path: "/" });

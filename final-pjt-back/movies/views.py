@@ -10,7 +10,7 @@ from .models import Movie, Review, Genre
 from django.contrib.auth.decorators import login_required
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def movie_list(request):
     # if request.user.is_authenticated:
         if request.method == 'GET':
@@ -97,6 +97,14 @@ def picks(request, movie_pk):
         movie.pick_users.add(request.user)    
         is_picked = True
     return Response(is_picked)
+
+@api_view(['GET'])
+def pick_list(request):
+    if request.method == 'GET':
+        genre = Genre.objects.get(pk=12)
+        movies = Movie.objects.all().order_by('-vote_count', '-vote_average')[:100]
+        serializer = MovieSerializer(movies, many=True)
+        return Response(serializer.data)
 
 ## 핫, 신작
 @api_view(['POST'])

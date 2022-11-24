@@ -12,7 +12,7 @@ import jwt_decode from "jwt-decode";
 
 const checkAuth = () => {
   const userInfo = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
-  const jwt = userInfo?.token;
+  const jwt = userInfo.token;
 
   if (jwt) {
     return `Bearer ${jwt}`;

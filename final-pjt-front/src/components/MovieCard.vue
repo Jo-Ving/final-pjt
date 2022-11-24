@@ -3,13 +3,6 @@
     <div class="container" v-if="movie">
       <div @click="onMovieClick">
         <img
-          style="
-            width: 262px;
-            height: 393px;
-            padding-top: 2px;
-            margin-top: 15px;
-            border-radius: 16px;
-          "
           :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
           alt=""
         />
@@ -59,7 +52,7 @@ export default {
       });
     },
     likeState() {
-      this.likeButtonState = this.movie.like_users.includes(this.getUserId())
+      this.likeButtonState = this.movie?.like_users.includes(this.getUserId())
         ? true
         : false;
     },
@@ -69,7 +62,6 @@ export default {
   },
   created() {
     this.likeState();
-    console.log(this.likeButtonState);
   },
 };
 </script>
@@ -83,6 +75,11 @@ export default {
 img {
   width: 80%;
   height: 80%;
+  /* width: 262px;
+  height: 393px;
+  padding-top: 2px;
+  margin-top: 15px;
+  border-radius: 16px; */
 }
 p {
   margin: 0;

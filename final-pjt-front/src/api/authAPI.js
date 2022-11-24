@@ -172,4 +172,13 @@ export const pickMovie = async (movieId) => {
   }
 };
 
-export const getUserId = async () => {};
+export const fetchRecommend1 = async (setRecentData, setHotData) => {
+  try {
+    const data = await instance.post(apiEndpoint.movieRecommend1, {});
+    setRecentData(data.recent_movies);
+    setHotData(data.hot_movies);
+  } catch (err) {
+    console.log(err);
+  }
+};
+export const fetchRecommend2 = () => {};

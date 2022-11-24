@@ -2,25 +2,22 @@
   <nav class="container">
     <div class="logo">Logo</div>
     <div class="navBar">
-      <nav>
-        <ul class="nav-left navItem">
-          <li><router-link to="/">HOME</router-link></li>
-          <li><router-link to="/myfavorite">내가 찜한 콘텐츠</router-link></li>
-        </ul>
-        <ul class="nav-right navItem">
-          <li>
-            <router-link to="/search">검색</router-link>
-          </li>
-          <li>햄버거바</li>
+      <ul class="nav-left navItem">
+        <li><router-link to="/">HOME</router-link></li>
+        <li><router-link to="/myfavorite">내가 찜한 콘텐츠</router-link></li>
+      </ul>
 
-          <li v-if="!isUserLoggedIn">
-            <router-link to="/login">Login</router-link>
-          </li>
-          <li v-if="isUserLoggedIn" @click="onLogout">
-            <router-link to="/login">Logout</router-link>
-          </li>
-        </ul>
-      </nav>
+      <ul class="nav-right navItem">
+        <li>
+          <router-link to="/search">검색</router-link>
+        </li>
+        <li v-if="!isUserLoggedIn">
+          <router-link to="/login">Login</router-link>
+        </li>
+        <li v-if="isUserLoggedIn" @click="onLogout">
+          <router-link to="/login">Logout</router-link>
+        </li>
+      </ul>
     </div>
   </nav>
 </template>
@@ -79,8 +76,10 @@ li {
   width: 90vw;
 }
 .nav-left {
+  border: 1px solid pink;
 }
 .nav-right {
+  border: 1px solid blue;
 }
 .navItem {
   display: flex;

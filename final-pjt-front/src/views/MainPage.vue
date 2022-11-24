@@ -4,8 +4,8 @@
     <CoverMovie />
     <!-- movies you must watch  -->
     <div class="movieContainer">
-      <SliderComponent />
-      <SliderComponent />
+      <SliderComponent :movies="recentMovies" :sliderName="`RECENT MOVIES`" />
+      <SliderComponent :movies="hotMovies" :sliderName="`HOT MOVIES`" />
       <SliderComponent />
       <MoviesComponent :movies="movies" />
     </div>
@@ -16,34 +16,48 @@
 import SliderComponent from "../components/SliderComponent.vue";
 import CoverMovie from "../components/CoverMovie.vue";
 import MoviesComponent from "../components/MoviesComponent.vue";
-import { fetchLikeMovies, fetchMovies } from "../api/authAPI";
+import { fetchLikeMovies, fetchMovies, fetchRecommend1 } from "../api/authAPI";
 
 export default {
   name: "MainPage",
-  components: { SliderComponent, CoverMovie, MoviesComponent },
+  components: {
+    SliderComponent,
+    CoverMovie,
+    MoviesComponent,
+  },
   data() {
     return {
       movies: [],
       likedMovies: [],
       userMovies: [],
+      hotMovies: [],
+      recentMovies: [],
     };
   },
   created() {
+    fetchRecommend1(this.setRecentData, this.setHotData);
     fetchMovies(this.setData);
     fetchLikeMovies();
+
     this.compareMovies();
   },
   methods: {
     setData(data) {
       this.movies = data;
     },
+    setRecentData(data) {
+      this.recentMovies = data;
+    },
+    setHotData(data) {
+      this.hotMovies = data;
+    },
     setLikedMoviesData(data) {
       this.likedMovies = data;
     },
     compareMovies() {
-      fetchLikeMovies((data) => {
-        console.log(data);
-      });
+      // fetchLikeMovies((data) => {
+      //   console.log(data);
+      // });
       this.movies?.map((movie) => {
         if (this.likedMovies.includes(movie)) {
           const newMovie = { ...movie, isUserLiked: true };
@@ -56,7 +70,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+/* @import "./base.scss"; */
 ul {
   margin: 0;
   padding: 0;
@@ -71,9 +86,5 @@ li {
 .container {
 }
 .movieContainer {
-}
-.slider {
-  display: flex;
-  justify-content: center;
 }
 </style>

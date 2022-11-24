@@ -5,7 +5,7 @@
       class="movieCard"
       v-if="movie"
       @click="onMoviePick"
-      :class="{ isPicked: isPicked }"
+      :class="{ togglePicked: isPicked }"
     >
       <img
         :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
@@ -19,7 +19,7 @@
 <script>
 import { pickMovie } from "../api/authAPI";
 export default {
-  name: "MovieCard",
+  name: "PickMovieCard",
   data() {
     return {
       isPicked: false,
@@ -73,7 +73,7 @@ p {
 .title {
   margin: 0;
 }
-.isPicked {
+.togglePicked {
   border-inline: 2px solid #7ee5eb;
 
   border-radius: 16px;

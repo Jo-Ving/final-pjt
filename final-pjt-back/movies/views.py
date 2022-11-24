@@ -115,7 +115,7 @@ def recommend1(request):
     serializer2 = MovieSerializer(hot_movies, many=True)
     print(request.user)
     data = {
-        'recent_movies' : serializer1.data,
+        'latest_movies' : serializer1.data,
         'hot_movies' : serializer2.data
     }
     

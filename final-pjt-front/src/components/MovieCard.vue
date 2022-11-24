@@ -24,8 +24,7 @@
         </div>
       </div>
       <button @click="onlikeButtonClick">
-        <!-- {{ onLikeState() }} -->
-        🤍
+        {{ likeButtonState ? "💛" : "🤍" }}
       </button>
     </div>
   </div>
@@ -33,12 +32,17 @@
 
 <script>
 import { fetchLikeState } from "../api/authAPI";
+import {
+  getLocalStorage,
+  LOCALSTORAGE_KEYS,
+} from "../utils/localStorage/LocalStorage";
 // import { toNextRouter } from "../router/routingLogic";
+
 export default {
   name: "MovieCard",
   data() {
     return {
-      likeButtonState: "🤍",
+      likeButtonState: false,
     };
   },
   props: {
@@ -47,6 +51,7 @@ export default {
   methods: {
     onlikeButtonClick() {
       fetchLikeState(this.movie.id);
+      this.likeButtonState = !this.likeButtonState;
     },
     onMovieClick() {
       this.$router.push({
@@ -55,9 +60,17 @@ export default {
       });
     },
     onLikeState() {
-      // console.log(this.movie);
-      // return this.movie.like_users.includes(userId) ? '💛' : '🤍'
+      this.likeButtonState = this.movie.like_users.includes(this.getUserId())
+        ? true
+        : false;
     },
+    getUserId() {
+      return getLocalStorage(LOCALSTORAGE_KEYS.userJWT).userId;
+    },
+  },
+  created() {
+    this.onLikeState();
+    console.log(this.likeButtonState);
   },
 };
 </script>

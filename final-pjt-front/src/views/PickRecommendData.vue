@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Pick your movies!</h1>
-    <button @click="goHome"> pick!! </button>
+    <button @click="goHome">pick!!</button>
     <PickMoviesComponent />
   </div>
 </template>
@@ -15,9 +15,9 @@ export default {
   },
   methods: {
     goHome() {
-      this.$router.push({ name:'main' })
+      this.$router.push({ name: "main" });
     },
-  },  
+  },
 };
 </script>
 

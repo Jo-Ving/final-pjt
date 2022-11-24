@@ -8,9 +8,12 @@ import {
 } from "@/utils/localStorage/LocalStorage";
 import axios from "axios";
 import { apiEndpoint, backendBaseUrl, movieUrl } from "./endpoints";
+import jwt_decode from "jwt-decode";
 
 const checkAuth = () => {
-  const jwt = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
+  const userInfo = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
+  const jwt = userInfo.token;
+
   if (jwt) {
     return `Bearer ${jwt}`;
   }
@@ -28,7 +31,6 @@ const instance = axios.create({
 instance.interceptors.response.use(
   (response) => {
     const res = response.data;
-    console.log(res);
     return res;
   },
   (error) => {
@@ -38,7 +40,13 @@ instance.interceptors.response.use(
 );
 
 const authResponseLogic = (token) => {
-  token ? setLocalStorage(LOCALSTORAGE_KEYS.userJWT, token) : "";
+  if (token) {
+    const userId = jwt_decode(token).user_id;
+    setLocalStorage(LOCALSTORAGE_KEYS.userJWT, {
+      token,
+      userId,
+    });
+  }
   // router.push({ path: "/" });
   // location.reload();
 };
@@ -137,7 +145,8 @@ export const fetchLikeState = async (movieId) => {
   const url = movieUrl(apiEndpoint.movieLikeState, movieId);
   try {
     const data = await instance.post(url);
-    console.log(data, "🎈");
+    console.log(data);
+    return data;
   } catch (err) {
     console.log(err);
   }

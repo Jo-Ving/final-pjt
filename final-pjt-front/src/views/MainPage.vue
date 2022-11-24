@@ -41,6 +41,9 @@ export default {
       this.likedMovies = data;
     },
     compareMovies() {
+      fetchLikeMovies((data) => {
+        console.log(data);
+      });
       this.movies?.map((movie) => {
         if (this.likedMovies.includes(movie)) {
           const newMovie = { ...movie, isUserLiked: true };

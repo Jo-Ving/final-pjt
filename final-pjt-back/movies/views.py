@@ -159,6 +159,8 @@ def recommend2(request):
         genre_video1 = genre1_movies[:min(len(genre1_movies)-1, r1*2)]
         genre_video2 = genre2_movies[:min(len(genre1_movies)-1, r2*2)]
         genre_video = set(list(genre_video1) + list(genre_video2))
+        genre_video = genre1_movies[:min(len(genre1_movies), 20)]
+        print('정민지 알라뷰')
     else:
         res = sorted_counts_by_genre[0]
         genre_id1 = res[0][0]

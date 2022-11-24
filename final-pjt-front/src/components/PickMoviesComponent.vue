@@ -12,9 +12,11 @@
 </template>
 
 <script>
-import { fetchMovies } from "../api/authAPI";
+// import { fetchMovies } from "../api/authAPI";
 import PickMovieCard from "./PickMovieCard.vue";
+import axios from 'axios'
 
+const API_URL = 'http://127.0.0.1:8000'
 export default {
   name: "MoviesComponent",
   components: { PickMovieCard },
@@ -25,12 +27,22 @@ export default {
     };
   },
   created() {
-    fetchMovies(this.setData);
+    axios({
+      method: 'get',
+      url: `${API_URL}/movies/pick_list`
+    })
+    .then((res) => {
+      this.movies = res.data
+      console.log(res,'aaaa')
+    })
+    .catch((err) => {
+      console.log(err)
+    })    
   },
   methods: {
-    setData(data) {
-      this.movies = data;
-    },
+    // setData(data) {
+    //   this.movies = data;
+    // },
     pickMovieCount(isPicked) {
       isPicked ? (this.pickedMovieCount += 1) : (this.pickedMovieCount -= 1);
       this.$emit("pickMovieCount", this.pickedMovieCount);

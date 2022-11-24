@@ -1,18 +1,19 @@
 <template>
   <div>
-    <div style="padding: 1rem; margin: 1rem" class="container">
-      <div class="detail-left">
-        <div class="d-flex flex-column">
-          <div>
-            <img
-              class=""
-              :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
-              alt=""
-            />
-            <h4>{{ movie.title }}</h4>
-          </div>
-          <div class="vstack gap-1">
-            <!-- <div class="hstack gap-3">
+    <div>
+      <div style="padding: 1rem; margin: 1rem" class="container">
+        <div class="detail-left">
+          <div class="d-flex flex-column">
+            <div>
+              <img
+                class=""
+                :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
+                alt=""
+              />
+              <h4>{{ movie.title }}</h4>
+            </div>
+            <div class="vstack gap-1">
+              <!-- <div class="hstack gap-3">
               <p>감독</p>
               <p>돼지</p>
             </div>
@@ -24,35 +25,39 @@
               <p>감독</p>
               <p>돼지</p>
             </div> -->
+            </div>
+            <p style="text-align: left">
+              {{ movie.overview }}
+            </p>
           </div>
-          <p style="text-align: left">
-            {{ movie.overview }}
-          </p>
         </div>
-      </div>
-      <div class="detail-right">
-        <form action="submit" @click.prevent>
-          <StarPoint @starCheck="starPoint" />
-          <InputComponent :userInput="content" @inputFromChild="getReview" />
-          <!-- <button @click="onReviewSubmit">리뷰 등록하기</button> -->
-          <ButtonComponent
-            @onButtonClick="onReviewSubmit"
-            :buttonName="`리뷰 등록`"
-          />
-        </form>
-        <div class="reviews">
-          <h4>리뷰 목록</h4>
-          <ul>
-            <ReviewComponent
-              v-for="review in reviews"
-              :review="review"
-              :key="review.id"
+        <div class="detail-right">
+          <form action="submit" @click.prevent>
+            <StarPoint @starCheck="starPoint" />
+            <InputComponent :userInput="content" @inputFromChild="getReview" />
+            <!-- <button @click="onReviewSubmit">리뷰 등록하기</button> -->
+            <ButtonComponent
+              @onButtonClick="onReviewSubmit"
+              :buttonName="`리뷰 등록`"
             />
-          </ul>
+          </form>
+          <div class="reviews">
+            <h4>리뷰 목록</h4>
+            <ul>
+              <ReviewComponent
+                v-for="review in reviews"
+                :review="review"
+                :key="review.id"
+              />
+            </ul>
+          </div>
+        </div>
+        <div>
+          <SliderComponent />
         </div>
       </div>
     </div>
-    <SliderComponent />
+    <SliderComponent :movies="similarMovies" :sliderName="`Similar movies`" />
   </div>
 </template>
 
@@ -82,6 +87,7 @@ export default {
       reviews: [],
       reviewScore: 0,
       content: "",
+      similarMovies: [],
       // submitReviewButton: BUTTON_NAMES?.submitReview,
     };
   },
@@ -110,7 +116,8 @@ export default {
     },
     setData(movie) {
       console.log(movie);
-      this.movie = movie;
+      this.movie = movie.movie;
+      this.similarMovies = movie.simliar_movies;
     },
     setReviewData(reviews) {
       this.reviews = reviews;

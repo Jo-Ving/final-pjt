@@ -1,7 +1,6 @@
 <template>
   <div>
     <form action="submit" @click.prevent>
-      <StarPoint />
       <InputComponent
         :userInput="searchInput"
         :labelName="`검색`"
@@ -22,11 +21,10 @@
 import InputComponent from "../components/InputComponent.vue";
 import { fetchMovies } from "../api/authAPI";
 import MoviesComponent from "../components/MoviesComponent.vue";
-import StarPoint from "../components/StarPoint.vue";
 
 export default {
   name: "SearchPage",
-  components: { InputComponent, MoviesComponent, StarPoint },
+  components: { InputComponent, MoviesComponent },
   data() {
     return {
       searchInput: "",

@@ -4,7 +4,7 @@
     <!-- <swiper class="swiper" :options="swiperOption"> -->
     <!-- <swiper-slide v-for="movie in movies" :key="movie.id"> -->
     <div class="movieContainer">
-      <MovieCard :movie="movie" />
+      <MovieCard :movie="movie" v-for="movie in movies" :key="movie.id" />
     </div>
     <!-- </swiper-slide> -->
     <!-- <div class="swiper-pagination" slot="pagination"></div> -->
@@ -13,14 +13,17 @@
 </template>
 
 <script>
-// import MovieCard from "./MovieCard.vue";
+import MovieCard from "./MovieCard.vue";
 // swiper
 // import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 // import "swiper/css/swiper.css";
 
 export default {
   name: "SliderComponent",
-  // components: { MovieCard, Swiper, SwiperSlide },
+  components: {
+    MovieCard,
+    //  Swiper, SwiperSlide
+  },
   props: {
     movies: Array,
     sliderName: String,
@@ -47,13 +50,12 @@ export default {
   font-size: 50px;
 }
 .container {
-  border: 1px solid pink;
   overflow: hidden;
 }
 .slider {
 }
 .movieContainer {
   display: flex;
-  border: 1px solid pink;
+  overflow-x: scroll;
 }
 </style>

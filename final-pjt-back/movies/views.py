@@ -156,8 +156,8 @@ def recommend2(request):
         genre2 = Genre.objects.get(pk=genre_id2)
         genre1_movies = genre1.genre_movies.all().order_by('-vote_count', '-vote_average')
         genre2_movies = genre2.genre_movies.all().order_by('-vote_count', '-vote_average')
-        genre_video1 = genre1_movies[:min(len(genre1_movies), r1*2)]
-        genre_video2 = genre2_movies[:min(len(genre1_movies), r2*2)]
+        genre_video1 = genre1_movies[:min(len(genre1_movies)-1, r1*2)]
+        genre_video2 = genre2_movies[:min(len(genre1_movies)-1, r2*2)]
         genre_video = set(list(genre_video1) + list(genre_video2))
     else:
         res = sorted_counts_by_genre[0]

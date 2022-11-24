@@ -76,10 +76,8 @@ li {
   width: 90vw;
 }
 .nav-left {
-  border: 1px solid pink;
 }
 .nav-right {
-  border: 1px solid blue;
 }
 .navItem {
   display: flex;

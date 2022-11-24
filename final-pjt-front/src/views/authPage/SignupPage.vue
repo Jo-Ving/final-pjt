@@ -23,25 +23,20 @@
         <div class="user-box">
           <InputComponent
             :userInput="passwordConfirm"
-            :labelName="`password confirm*`"
+            :labelName="`password*`"
             @inputFromChild="getPasswordConfirmValue"
           />
           <div class="message-box">
             <p class="validate-message">{{ passwordEqualMessage }}</p>
           </div>
         </div>
-        <!-- <button @click="onSignUpButtonClick">
+        <button @click="onSignUpButtonClick">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           Sign up
-        </button> -->
-        <ButtonComponent
-          :disabled="isValidate === false"
-          @onButtonClick="onSignUpButtonClick"
-          :buttonName="`Sign up`"
-        />
+        </button>
       </form>
       <p>
         have an account?
@@ -56,7 +51,7 @@
 
 <script>
 import InputComponent from "../../components/InputComponent.vue";
-import ButtonComponent from "../../components/ButtonComponent.vue";
+// import PickMoviesComponent from "../../components/PickMoviesComponent.vue";
 
 import { checkEmailValidate, checkPasswordEqal } from "../../utils/validators";
 import {
@@ -75,22 +70,18 @@ export default {
       passwordConfirm: "",
       emailValidateMessage: "",
       passwordEqualMessage: "",
-      isValidate: false,
+      submitButtonState: false,
     };
   },
   components: {
     InputComponent,
-    ButtonComponent,
+    // PickMoviesComponent,
   },
   methods: {
     getEmailValue(email) {
-      if (checkEmailValidate(email)) {
-        this.isValidate = true;
-        this.emailValidateMessage = "";
-        return;
-      }
-      this.emailValidateMessage = EMAIL_VALIDATION_FALSE;
-      this.isValidate = false;
+      this.emailValidateMessage = checkEmailValidate(email)
+        ? ""
+        : EMAIL_VALIDATION_FALSE;
       this.email = email;
     },
     getPasswordValue(password) {
@@ -98,15 +89,15 @@ export default {
     },
     getPasswordConfirmValue(passwordConfirm) {
       this.passwordConfirm = passwordConfirm;
-      if (checkPasswordEqal(this.password, this.passwordConfirm)) {
-        this.passwordEqualMessage = "";
-        this.isValidate = true;
-        return;
-      }
-      this.passwordEqualMessage = PASSWORD_EQUAL_FALSE;
-      this.isValidate = false;
+      this.passwordEqualMessage = checkPasswordEqal(
+        this.password,
+        this.passwordConfirm
+      )
+        ? ""
+        : PASSWORD_EQUAL_FALSE;
     },
-    onSignUpButtonClick() {
+    onSignUpButtonClick(e) {
+      console.log(e.target);
       fetchSignup({
         username: this.email,
         password: this.password,
@@ -199,6 +190,112 @@ body {
   left: 0;
   color: #7ee5eb;
   font-size: 12px;
+}
+
+.login-box form button {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #7ee5eb;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-top: 40px;
+  letter-spacing: 4px;
+}
+
+.login-box button:hover {
+  background: #7ee5eb;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #7ee5eb, 0 0 25px #7ee5eb, 0 0 50px #7ee5eb,
+    0 0 100px #7ee5eb;
+}
+
+.login-box button span {
+  position: absolute;
+  display: block;
+}
+
+.login-box button span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #7ee5eb);
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+.login-box button span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #7ee5eb);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+.login-box button span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #7ee5eb);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+.login-box button span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #7ee5eb);
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
 }
 
 /* my job  */

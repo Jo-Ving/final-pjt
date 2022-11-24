@@ -2,7 +2,12 @@
   <div>
     <h1>내가 찜한 영화</h1>
     <ul>
-      <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
+      <MovieCard
+        v-for="movie in movies"
+        :key="movie.id"
+        :movie="movie"
+        @likeButtonclick="onLikedButtonClick"
+      />
     </ul>
   </div>
 </template>
@@ -33,6 +38,17 @@ export default {
   methods: {
     setData(data) {
       this.movies = data;
+    },
+    onLikedButtonClick(movieId) {
+      console.log(this.movies);
+      console.log(movieId);
+      const newMovies = [];
+      this.movies.map((movie) => {
+        if (movie.id !== movieId) {
+          newMovies.push(movie);
+        }
+      });
+      this.movies = newMovies;
     },
   },
 };

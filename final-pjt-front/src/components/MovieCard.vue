@@ -43,6 +43,7 @@ export default {
   },
   methods: {
     onlikeButtonClick() {
+      this.$emit("likeButtonclick", this.movie.id);
       fetchLikeState(this.movie.id);
       this.likeButtonState = !this.likeButtonState;
     },

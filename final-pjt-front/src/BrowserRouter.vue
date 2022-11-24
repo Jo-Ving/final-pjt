@@ -20,5 +20,6 @@ export default {
 <style scoped>
 .mainView {
   min-height: 90vh;
+  margin: auto;
 }
 </style>

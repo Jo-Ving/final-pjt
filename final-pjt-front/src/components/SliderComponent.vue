@@ -55,6 +55,8 @@ export default {
   font-size: 50px;
 }
 .container {
+  display: flex;
+  flex-direction: column;
   /* border: 1px solid pink; */
 }
 /* .container ::-webkit-scrollbar {

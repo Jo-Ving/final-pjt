@@ -1,6 +1,6 @@
 <template>
   <nav class="container">
-    <div class="logo">Logo</div>
+    <div class="logo">Jo-ving</div>
     <div class="navBar">
       <ul class="nav-left navItem">
         <li><router-link to="/">HOME</router-link></li>

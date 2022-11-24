@@ -132,10 +132,11 @@ export const fetchMovies = async (setData) => {
 
 export const fetchMovieDetail = async (setData, movieId) => {
   const url = movieUrl(apiEndpoint.movieDetail, movieId);
-
+  console.log(url);
   try {
     const data = await instance.get(url);
     setData(data);
+    console.log(data);
   } catch (err) {
     console.log(err);
   }
@@ -177,8 +178,17 @@ export const fetchRecommend1 = async (setRecentData, setHotData) => {
     const data = await instance.post(apiEndpoint.movieRecommend1, {});
     setRecentData(data.recent_movies);
     setHotData(data.hot_movies);
+    console.log(data);
   } catch (err) {
     console.log(err);
   }
 };
-export const fetchRecommend2 = () => {};
+export const fetchRecommend2 = async (setRecommendData) => {
+  try {
+    const data = await instance.post(apiEndpoint.movieRecommend2, {});
+    setRecommendData(data);
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+};

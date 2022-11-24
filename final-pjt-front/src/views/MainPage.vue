@@ -4,10 +4,10 @@
     <CoverMovie />
     <!-- movies you must watch  -->
     <div class="movieContainer">
+      <SliderComponent :movies="recommendData" :sliderName="`RECOMMEND`" />
       <SliderComponent :movies="recentMovies" :sliderName="`RECENT MOVIES`" />
       <SliderComponent :movies="hotMovies" :sliderName="`HOT MOVIES`" />
-      <SliderComponent />
-      <MoviesComponent :movies="movies" />
+      <!-- <MoviesComponent :movies="movies" /> -->
     </div>
   </div>
 </template>
@@ -15,15 +15,20 @@
 <script>
 import SliderComponent from "../components/SliderComponent.vue";
 import CoverMovie from "../components/CoverMovie.vue";
-import MoviesComponent from "../components/MoviesComponent.vue";
-import { fetchLikeMovies, fetchMovies, fetchRecommend1 } from "../api/authAPI";
+// import MoviesComponent from "../components/MoviesComponent.vue";
+import {
+  fetchLikeMovies,
+  fetchMovies,
+  fetchRecommend1,
+  fetchRecommend2,
+} from "../api/authAPI";
 
 export default {
   name: "MainPage",
   components: {
     SliderComponent,
     CoverMovie,
-    MoviesComponent,
+    // MoviesComponent,
   },
   data() {
     return {
@@ -32,10 +37,12 @@ export default {
       userMovies: [],
       hotMovies: [],
       recentMovies: [],
+      recommendData: [],
     };
   },
   created() {
     fetchRecommend1(this.setRecentData, this.setHotData);
+    fetchRecommend2(this.setRecommendData);
     fetchMovies(this.setData);
     fetchLikeMovies();
 
@@ -44,6 +51,9 @@ export default {
   methods: {
     setData(data) {
       this.movies = data;
+    },
+    setRecommendData(data) {
+      this.recommendData = data;
     },
     setRecentData(data) {
       this.recentMovies = data;

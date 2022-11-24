@@ -37,6 +37,7 @@
             <InputComponent :userInput="content" @inputFromChild="getReview" />
             <!-- <button @click="onReviewSubmit">리뷰 등록하기</button> -->
             <ButtonComponent
+              :disabled="loginState === false"
               @onButtonClick="onReviewSubmit"
               :buttonName="`리뷰 등록`"
             />
@@ -70,6 +71,7 @@ import ButtonComponent from "../components/ButtonComponent.vue";
 // import BUTTON_NAMES from "../assets/constants";
 
 import { fetchMovieDetail, createReview, fetchReview } from "../api/authAPI";
+import { isLogin } from "../utils/localStorage/LocalStorage";
 
 export default {
   name: "DetailPage",
@@ -88,10 +90,12 @@ export default {
       reviewScore: 0,
       content: "",
       similarMovies: [],
+      loginState: true,
       // submitReviewButton: BUTTON_NAMES?.submitReview,
     };
   },
   created() {
+    this.loginState = isLogin();
     const splitedLocation = location.pathname.split("/");
     const movieId = splitedLocation[splitedLocation.length - 1];
     this.movieId = movieId;

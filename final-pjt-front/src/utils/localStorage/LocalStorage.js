@@ -14,3 +14,10 @@ export const deleteLocalStorage = (key) => {
 export const LOCALSTORAGE_KEYS = Object.freeze({
   userJWT: "userJWT",
 });
+
+export const isLogin = () => {
+  const userInfo = getLocalStorage(LOCALSTORAGE_KEYS.userJWT);
+  const jwt = userInfo?.token;
+
+  return jwt ? true : false;
+};

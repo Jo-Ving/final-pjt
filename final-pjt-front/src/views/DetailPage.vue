@@ -70,7 +70,6 @@ import ButtonComponent from "../components/ButtonComponent.vue";
 // import BUTTON_NAMES from "../assets/constants";
 
 import { fetchMovieDetail, createReview, fetchReview } from "../api/authAPI";
-import { checkUser } from "../router/routingLogic";
 
 export default {
   name: "DetailPage",
@@ -93,7 +92,6 @@ export default {
     };
   },
   created() {
-    checkUser();
     const splitedLocation = location.pathname.split("/");
     const movieId = splitedLocation[splitedLocation.length - 1];
     this.movieId = movieId;

@@ -31,7 +31,7 @@
           </div>
         </div>
         <ButtonComponent
-          :disabled="isValidate === false"
+          :disabled="isEmailValidate === false || isPasswordValidate === false"
           @onButtonClick="onSignUpButtonClick"
           :buttonName="`Sign up`"
         />
@@ -69,7 +69,8 @@ export default {
       emailValidateMessage: "",
       passwordEqualMessage: "",
       submitButtonState: false,
-      isValidate: false,
+      isEmailValidate: false,
+      isPasswordValidate: false,
     };
   },
   components: {
@@ -78,27 +79,34 @@ export default {
   },
   methods: {
     getEmailValue(email) {
-      if (checkEmailValidate(email)) {
-        this.isValidate = true;
+      this.email = email;
+      if (checkEmailValidate(this.email)) {
+        this.isEmailValidate = true;
         this.emailValidateMessage = "";
         return;
       }
       this.emailValidateMessage = EMAIL_VALIDATION_FALSE;
-      this.isValidate = false;
-      this.email = email;
+      this.isEmailValidate = false;
     },
     getPasswordValue(password) {
       this.password = password;
+      if (checkPasswordEqal(this.password, this.passwordConfirm)) {
+        this.passwordEqualMessage = "";
+        this.isPasswordValidate = true;
+        return;
+      }
+      this.passwordEqualMessage = PASSWORD_EQUAL_FALSE;
+      this.isPasswordValidate = false;
     },
     getPasswordConfirmValue(passwordConfirm) {
       this.passwordConfirm = passwordConfirm;
       if (checkPasswordEqal(this.password, this.passwordConfirm)) {
         this.passwordEqualMessage = "";
-        this.isValidate = true;
+        this.isPasswordValidate = true;
         return;
       }
       this.passwordEqualMessage = PASSWORD_EQUAL_FALSE;
-      this.isValidate = false;
+      this.isPasswordValidate = false;
     },
     onSignUpButtonClick() {
       fetchSignup({

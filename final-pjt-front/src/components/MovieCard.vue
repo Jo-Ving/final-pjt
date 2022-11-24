@@ -91,7 +91,11 @@ button {
   background: transparent;
 }
 .cardContainer {
-  display: inline-block;
+  /* display: inline-block; */
+  max-width: 262px;
+  max-height: 393px;
+  min-width: 180px;
+  min-height: 310px;
 }
 .container {
   cursor: pointer;

@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <p>© 2022 Dramatic. All Rights Reserved.</p>
+  <div class="container">
+    <hr />
+    <div class="footer">
+      <p>© 2022 Dramatic. All Rights Reserved.</p>
+    </div>
   </div>
 </template>
 
@@ -10,4 +13,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.container {
+  margin-top: 5rem;
+}
+.footer {
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+}
+</style>

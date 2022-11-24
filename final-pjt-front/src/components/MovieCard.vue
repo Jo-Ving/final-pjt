@@ -9,14 +9,15 @@
         <div>
           <h6 class="title">{{ movie?.title }}</h6>
           <div>
-            <div>
-              <h6 class="title">{{ movie?.release_date }}</h6>
-              <h6 class="title">{{ movie?.vote_average }}</h6>
+            <div class="desc-container">
+              <hr />
+              <h6 class="date desc">{{ movie?.release_date }}</h6>
+              <h6 class="vote desc">{{ movie?.vote_average }}</h6>
             </div>
           </div>
         </div>
       </div>
-      <button @click="onlikeButtonClick">
+      <button class="like-button" @click="onlikeButtonClick">
         {{ likeButtonState ? "💛" : "🤍" }}
       </button>
     </div>
@@ -67,6 +68,10 @@ export default {
 </script>
 
 <style scoped>
+hr {
+  margin: 3px;
+}
+
 /* .movieCard {
   width: 183px;
   height: 275px;
@@ -91,7 +96,7 @@ button {
   background: transparent;
 }
 .cardContainer {
-  /* display: inline-block; */
+  display: inline-block;
   max-width: 262px;
   max-height: 393px;
   min-width: 180px;
@@ -103,5 +108,25 @@ button {
 }
 .title {
   margin: 0;
+  margin-top: 10px;
+  font-weight: bold;
+}
+.desc-container {
+  margin-top: 10px;
+}
+.desc {
+  margin: 0;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.desc.date {
+  text-align: left;
+}
+
+.desc.vote {
+  text-align: right;
+}
+.like-button {
+  align-items: left;
 }
 </style>

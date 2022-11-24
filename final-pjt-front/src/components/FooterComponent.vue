@@ -14,9 +14,6 @@ export default {
 </script>
 
 <style>
-.container {
-  margin-top: 5rem;
-}
 .footer {
   padding-top: 4rem;
   padding-bottom: 2rem;

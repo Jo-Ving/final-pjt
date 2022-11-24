@@ -15,13 +15,12 @@
         :labelName="`password*`"
         @inputFromChild="getPasswordValue"
       />
-      <button @click="onLoginButtonClick">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        Login
-      </button>
+
+      <ButtonComponent
+        :disabled="isValidate === false"
+        @onButtonClick="onLoginButtonClick"
+        :buttonName="`Login`"
+      />
     </form>
     <p>
       Don't have an account?
@@ -32,6 +31,7 @@
 
 <script>
 import InputComponent from "../../components/InputComponent.vue";
+import ButtonComponent from "../../components/ButtonComponent.vue";
 import { checkEmailValidate } from "../../utils/validators";
 import { EMAIL_VALIDATION_FALSE } from "../../assets/constants";
 import { toNextRouter } from "../../router/routingLogic";
@@ -44,23 +44,28 @@ export default {
       email: "",
       password: "",
       emailValidateMessage: "",
+      isValidate: false,
     };
   },
   components: {
     InputComponent,
+    ButtonComponent,
   },
   methods: {
     getEmailValue(email) {
-      this.emailValidateMessage = checkEmailValidate(email)
-        ? ""
-        : EMAIL_VALIDATION_FALSE;
+      if (checkEmailValidate(email)) {
+        this.isValidate = true;
+        this.emailValidateMessage = "";
+        return;
+      }
+      this.emailValidateMessage = EMAIL_VALIDATION_FALSE;
+      this.isValidate = false;
       this.email = email;
     },
     getPasswordValue(password) {
       this.password = password;
     },
-    onLoginButtonClick(e) {
-      console.log(e.target);
+    onLoginButtonClick() {
       fetchLogin({
         username: this.email,
         password: this.password,
@@ -152,7 +157,7 @@ body {
   color: #7ee5eb;
   font-size: 12px;
 }
-
+/* 
 .login-box form button {
   position: relative;
   display: inline-block;
@@ -257,7 +262,7 @@ body {
   100% {
     bottom: 100%;
   }
-}
+} */
 
 /* my job  */
 .changepage-link {

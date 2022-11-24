@@ -1,6 +1,6 @@
 <template>
   <div>
-    myFavorite
+    <h1>내가 찜한 영화</h1>
     <ul>
       <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
     </ul>

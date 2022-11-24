@@ -22,6 +22,8 @@ export default {
 <style scoped>
 button {
   margin: 20px;
+  font-size: 20px;
+  font-weight: bold;
 }
 .custom-btn {
   width: 130px;

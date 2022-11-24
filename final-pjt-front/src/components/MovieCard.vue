@@ -3,13 +3,6 @@
     <div class="container" v-if="movie">
       <div @click="onMovieClick">
         <img
-          style="
-            width: 262px;
-            height: 393px;
-            padding-top: 2px;
-            margin-top: 15px;
-            border-radius: 16px;
-          "
           :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
           alt=""
         />
@@ -36,7 +29,6 @@ import {
   getLocalStorage,
   LOCALSTORAGE_KEYS,
 } from "../utils/localStorage/LocalStorage";
-// import { toNextRouter } from "../router/routingLogic";
 
 export default {
   name: "MovieCard",
@@ -59,8 +51,8 @@ export default {
         params: { id: this.movie.id },
       });
     },
-    onLikeState() {
-      this.likeButtonState = this.movie.like_users.includes(this.getUserId())
+    likeState() {
+      this.likeButtonState = this.movie?.like_users.includes(this.getUserId())
         ? true
         : false;
     },
@@ -69,8 +61,7 @@ export default {
     },
   },
   created() {
-    this.onLikeState();
-    console.log(this.likeButtonState);
+    this.likeState();
   },
 };
 </script>
@@ -84,6 +75,11 @@ export default {
 img {
   width: 80%;
   height: 80%;
+  /* width: 262px;
+  height: 393px;
+  padding-top: 2px;
+  margin-top: 15px;
+  border-radius: 16px; */
 }
 p {
   margin: 0;

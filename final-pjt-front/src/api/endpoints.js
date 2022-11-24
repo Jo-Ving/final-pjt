@@ -13,6 +13,9 @@ export const apiEndpoint = {
   movieLikeState: `/movies/ID/likes/`,
 
   moviePickMoie: `/movies/ID/picks/`,
+
+  movieRecommend1: `/movies/recommend1/`,
+  movieRecommend2: `/movies/recommend2/`,
 };
 
 export const movieUrl = (baseUrl, movieId) => {

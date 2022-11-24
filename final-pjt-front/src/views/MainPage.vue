@@ -4,9 +4,21 @@
     <CoverMovie />
     <!-- movies you must watch  -->
     <div class="movieContainer">
-      <SliderComponent :movies="recommendData" :sliderName="`RECOMMEND`" />
-      <SliderComponent :movies="recentMovies" :sliderName="`RECENT MOVIES`" />
-      <SliderComponent :movies="hotMovies" :sliderName="`HOT MOVIES`" />
+      <SliderComponent
+        v-if="recommendData"
+        :movies="recommendData"
+        :sliderName="`RECOMMEND`"
+      />
+      <SliderComponent
+        v-if="recentMovies"
+        :movies="recentMovies"
+        :sliderName="`RECENT MOVIES`"
+      />
+      <SliderComponent
+        v-if="hotMovies"
+        :movies="hotMovies"
+        :sliderName="`HOT MOVIES`"
+      />
       <!-- <MoviesComponent :movies="movies" /> -->
     </div>
   </div>

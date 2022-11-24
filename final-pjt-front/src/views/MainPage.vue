@@ -12,7 +12,7 @@
       <SliderComponent
         v-if="recentMovies"
         :movies="recentMovies"
-        :sliderName="`RECENT MOVIES`"
+        :sliderName="`LATEST MOVIES`"
       />
       <SliderComponent
         v-if="hotMovies"

@@ -13,7 +13,7 @@
             />
             <!-- <h5>{{ movie.genres }}</h5> -->
             <li v-for="genre in genreName" :key="genre">{{ genre }}</li>
-            <p>{{ movie.popularity }}</p>
+            <p>관람객 평점 : {{ movie.vote_average }}</p>
           </div>
           <div class="vstack gap-1">
             <!-- <div class="hstack gap-3">
